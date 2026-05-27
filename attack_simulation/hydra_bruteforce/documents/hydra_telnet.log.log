@@ -1,0 +1,200 @@
+May 27 14:38:31 metasploitable login[5286]: FAILED LOGIN (3) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:32 metasploitable login[5289]: FAILED LOGIN (2) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:32 metasploitable login[5285]: FAILED LOGIN (3) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:32 metasploitable login[5286]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:32 metasploitable login[5287]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:32 metasploitable login[5289]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:33 metasploitable login[5285]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:34 metasploitable login[5286]: TOO MANY LOGIN TRIES (4) on 'pts/2' FOR `UNKNOWN'
+May 27 14:38:34 metasploitable login[5286]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:34 metasploitable login[5286]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:34 metasploitable login[5286]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:38:34 metasploitable login[5287]: TOO MANY LOGIN TRIES (4) on 'pts/3' FOR `UNKNOWN'
+May 27 14:38:34 metasploitable login[5287]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:34 metasploitable login[5287]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:34 metasploitable login[5287]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:38:35 metasploitable login[5289]: FAILED LOGIN (3) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:35 metasploitable login[5285]: TOO MANY LOGIN TRIES (4) on 'pts/1' FOR `UNKNOWN'
+May 27 14:38:35 metasploitable login[5285]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:35 metasploitable login[5285]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:35 metasploitable login[5285]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:38:36 metasploitable login[5289]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:36 metasploitable login[5292]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost=  user=msfadmin
+May 27 14:38:36 metasploitable login[5293]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost=  user=msfadmin
+May 27 14:38:37 metasploitable login[5295]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost=  user=msfadmin
+May 27 14:38:37 metasploitable login[5289]: TOO MANY LOGIN TRIES (4) on 'pts/4' FOR `UNKNOWN'
+May 27 14:38:37 metasploitable login[5289]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:37 metasploitable login[5289]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:37 metasploitable login[5289]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:38:38 metasploitable login[5292]: FAILED LOGIN (1) on 'pts/1' FOR `msfadmin', Authentication failure
+May 27 14:38:38 metasploitable login[5293]: FAILED LOGIN (1) on 'pts/2' FOR `msfadmin', Authentication failure
+May 27 14:38:39 metasploitable login[5295]: FAILED LOGIN (1) on 'pts/3' FOR `msfadmin', Authentication failure
+May 27 14:38:39 metasploitable login[5292]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:39 metasploitable login[5292]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:38:39 metasploitable login[5293]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:39 metasploitable login[5293]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:38:39 metasploitable login[5295]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:39 metasploitable login[5295]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:38:39 metasploitable login[5297]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost=  user=msfadmin
+May 27 14:38:40 metasploitable login[5292]: FAILED LOGIN (2) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:40 metasploitable login[5293]: FAILED LOGIN (2) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:41 metasploitable login[5292]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:41 metasploitable login[5293]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:41 metasploitable login[5297]: FAILED LOGIN (1) on 'pts/4' FOR `msfadmin', Authentication failure
+May 27 14:38:41 metasploitable login[5295]: FAILED LOGIN (2) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:41 metasploitable login[5297]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:41 metasploitable login[5297]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:38:42 metasploitable login[5295]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:43 metasploitable login[5292]: FAILED LOGIN (3) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:43 metasploitable login[5293]: FAILED LOGIN (3) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:43 metasploitable login[5297]: FAILED LOGIN (2) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:44 metasploitable login[5292]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:44 metasploitable login[5293]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:44 metasploitable login[5297]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:44 metasploitable login[5295]: FAILED LOGIN (3) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:45 metasploitable login[5295]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:46 metasploitable login[5292]: TOO MANY LOGIN TRIES (4) on 'pts/1' FOR `UNKNOWN'
+May 27 14:38:46 metasploitable login[5292]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:46 metasploitable login[5292]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:46 metasploitable login[5292]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:38:46 metasploitable login[5293]: TOO MANY LOGIN TRIES (4) on 'pts/2' FOR `UNKNOWN'
+May 27 14:38:46 metasploitable login[5293]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:46 metasploitable login[5293]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:46 metasploitable login[5293]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:38:46 metasploitable login[5297]: FAILED LOGIN (3) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:47 metasploitable login[5297]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:47 metasploitable login[5295]: TOO MANY LOGIN TRIES (4) on 'pts/3' FOR `UNKNOWN'
+May 27 14:38:47 metasploitable login[5295]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:47 metasploitable login[5295]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:47 metasploitable login[5295]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:38:47 metasploitable login[5300]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost=  user=msfadmin
+May 27 14:38:47 metasploitable login[5301]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost=  user=msfadmin
+May 27 14:38:48 metasploitable login[5303]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost=  user=msfadmin
+May 27 14:38:49 metasploitable login[5297]: TOO MANY LOGIN TRIES (4) on 'pts/4' FOR `UNKNOWN'
+May 27 14:38:49 metasploitable login[5297]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:49 metasploitable login[5297]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:49 metasploitable login[5297]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:38:49 metasploitable login[5300]: FAILED LOGIN (1) on 'pts/1' FOR `msfadmin', Authentication failure
+May 27 14:38:49 metasploitable login[5301]: FAILED LOGIN (1) on 'pts/2' FOR `msfadmin', Authentication failure
+May 27 14:38:50 metasploitable login[5301]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:50 metasploitable login[5301]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:38:50 metasploitable login[5300]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:50 metasploitable login[5300]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:38:50 metasploitable login[5303]: FAILED LOGIN (1) on 'pts/3' FOR `msfadmin', Authentication failure
+May 27 14:38:51 metasploitable login[5305]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost=  user=msfadmin
+May 27 14:38:51 metasploitable login[5303]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:51 metasploitable login[5303]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:38:51 metasploitable login[5301]: FAILED LOGIN (2) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:51 metasploitable login[5300]: FAILED LOGIN (2) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:52 metasploitable login[5301]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:52 metasploitable login[5300]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:52 metasploitable login[5305]: FAILED LOGIN (1) on 'pts/4' FOR `msfadmin', Authentication failure
+May 27 14:38:52 metasploitable login[5303]: FAILED LOGIN (2) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:53 metasploitable login[5305]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:53 metasploitable login[5305]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:38:53 metasploitable login[5303]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:54 metasploitable login[5301]: FAILED LOGIN (3) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:54 metasploitable login[5300]: FAILED LOGIN (3) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:54 metasploitable login[5301]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:54 metasploitable login[5305]: FAILED LOGIN (2) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:55 metasploitable login[5300]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:55 metasploitable login[5303]: FAILED LOGIN (3) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:55 metasploitable login[5305]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:55 metasploitable login[5303]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:56 metasploitable login[5301]: TOO MANY LOGIN TRIES (4) on 'pts/2' FOR `UNKNOWN'
+May 27 14:38:56 metasploitable login[5301]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:56 metasploitable login[5301]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:56 metasploitable login[5301]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:38:56 metasploitable login[5300]: TOO MANY LOGIN TRIES (4) on 'pts/1' FOR `UNKNOWN'
+May 27 14:38:56 metasploitable login[5300]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:56 metasploitable login[5300]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:56 metasploitable login[5300]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:38:57 metasploitable login[5305]: FAILED LOGIN (3) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:38:57 metasploitable login[5303]: TOO MANY LOGIN TRIES (4) on 'pts/3' FOR `UNKNOWN'
+May 27 14:38:57 metasploitable login[5303]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:38:57 metasploitable login[5303]: pam_unix(login:session): close_session - error recovering username
+May 27 14:38:57 metasploitable login[5303]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:38:58 metasploitable login[5305]: pam_unix(login:auth): check pass; user unknown
+May 27 14:38:58 metasploitable login[5309]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost=  user=msfadmin
+May 27 14:38:58 metasploitable login[5308]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost=  user=msfadmin
+May 27 14:38:59 metasploitable login[5311]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost=  user=msfadmin
+May 27 14:39:00 metasploitable login[5305]: TOO MANY LOGIN TRIES (4) on 'pts/4' FOR `UNKNOWN'
+May 27 14:39:00 metasploitable login[5305]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:39:00 metasploitable login[5305]: pam_unix(login:session): close_session - error recovering username
+May 27 14:39:00 metasploitable login[5305]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:39:00 metasploitable login[5309]: FAILED LOGIN (1) on 'pts/2' FOR `msfadmin', Authentication failure
+May 27 14:39:00 metasploitable login[5308]: FAILED LOGIN (1) on 'pts/1' FOR `msfadmin', Authentication failure
+May 27 14:39:01 metasploitable CRON[5313]: pam_unix(cron:session): session opened for user root by (uid=0)
+May 27 14:39:01 metasploitable CRON[5313]: pam_unix(cron:session): session closed for user root
+May 27 14:39:01 metasploitable login[5309]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:01 metasploitable login[5309]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:39:01 metasploitable login[5308]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:01 metasploitable login[5308]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:39:02 metasploitable login[5311]: FAILED LOGIN (1) on 'pts/3' FOR `msfadmin', Authentication failure
+May 27 14:39:02 metasploitable login[5325]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost=  user=msfadmin
+May 27 14:39:02 metasploitable login[5311]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:02 metasploitable login[5311]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:39:03 metasploitable login[5309]: FAILED LOGIN (2) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:03 metasploitable login[5308]: FAILED LOGIN (2) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:03 metasploitable login[5325]: FAILED LOGIN (1) on 'pts/4' FOR `msfadmin', Authentication failure
+May 27 14:39:03 metasploitable login[5309]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:04 metasploitable login[5308]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:04 metasploitable login[5311]: FAILED LOGIN (2) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:04 metasploitable login[5325]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:04 metasploitable login[5325]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:39:04 metasploitable login[5311]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:05 metasploitable login[5309]: FAILED LOGIN (3) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:06 metasploitable login[5308]: FAILED LOGIN (3) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:06 metasploitable login[5325]: FAILED LOGIN (2) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:06 metasploitable login[5308]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:06 metasploitable login[5311]: FAILED LOGIN (3) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:06 metasploitable login[5309]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:07 metasploitable login[5325]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:07 metasploitable login[5311]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:08 metasploitable login[5308]: TOO MANY LOGIN TRIES (4) on 'pts/1' FOR `UNKNOWN'
+May 27 14:39:08 metasploitable login[5308]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:39:08 metasploitable login[5308]: pam_unix(login:session): close_session - error recovering username
+May 27 14:39:08 metasploitable login[5308]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:39:08 metasploitable login[5325]: FAILED LOGIN (3) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:08 metasploitable login[5311]: TOO MANY LOGIN TRIES (4) on 'pts/3' FOR `UNKNOWN'
+May 27 14:39:08 metasploitable login[5311]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:39:08 metasploitable login[5311]: pam_unix(login:session): close_session - error recovering username
+May 27 14:39:08 metasploitable login[5311]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:39:08 metasploitable login[5309]: TOO MANY LOGIN TRIES (4) on 'pts/2' FOR `UNKNOWN'
+May 27 14:39:08 metasploitable login[5309]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:39:08 metasploitable login[5309]: pam_unix(login:session): close_session - error recovering username
+May 27 14:39:08 metasploitable login[5309]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:39:09 metasploitable login[5325]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:09 metasploitable login[5328]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost=  user=msfadmin
+May 27 14:39:09 metasploitable login[5329]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost=  user=msfadmin
+May 27 14:39:10 metasploitable login[5325]: TOO MANY LOGIN TRIES (4) on 'pts/4' FOR `UNKNOWN'
+May 27 14:39:10 metasploitable login[5325]: pam_mail(login:session): pam_putenv: delete non-existent entry; MAIL
+May 27 14:39:10 metasploitable login[5325]: pam_unix(login:session): close_session - error recovering username
+May 27 14:39:10 metasploitable login[5325]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:39:11 metasploitable login[5331]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost=  user=msfadmin
+May 27 14:39:11 metasploitable login[5328]: FAILED LOGIN (1) on 'pts/1' FOR `msfadmin', Authentication failure
+May 27 14:39:11 metasploitable login[5329]: FAILED LOGIN (1) on 'pts/2' FOR `msfadmin', Authentication failure
+May 27 14:39:12 metasploitable login[5328]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:12 metasploitable login[5328]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/1 ruser= rhost= 
+May 27 14:39:12 metasploitable login[5329]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:12 metasploitable login[5329]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/2 ruser= rhost= 
+May 27 14:39:12 metasploitable login[5334]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost=  user=msfadmin
+May 27 14:39:12 metasploitable login[5331]: FAILED LOGIN (1) on 'pts/3' FOR `msfadmin', Authentication failure
+May 27 14:39:14 metasploitable login[5331]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:14 metasploitable login[5331]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/3 ruser= rhost= 
+May 27 14:39:14 metasploitable login[5328]: FAILED LOGIN (2) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:14 metasploitable login[5329]: FAILED LOGIN (2) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:14 metasploitable login[5334]: FAILED LOGIN (1) on 'pts/4' FOR `msfadmin', Authentication failure
+May 27 14:39:14 metasploitable login[5329]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:14 metasploitable login[5328]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:15 metasploitable login[5334]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:15 metasploitable login[5334]: pam_unix(login:auth): authentication failure; logname= uid=0 euid=0 tty=pts/4 ruser= rhost= 
+May 27 14:39:15 metasploitable login[5331]: FAILED LOGIN (2) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:16 metasploitable login[5331]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:16 metasploitable login[5329]: FAILED LOGIN (3) on 'pts/2' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:16 metasploitable login[5328]: FAILED LOGIN (3) on 'pts/1' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:17 metasploitable login[5334]: FAILED LOGIN (2) on 'pts/4' FOR `UNKNOWN', User not known to the underlying authentication module
+May 27 14:39:17 metasploitable login[5328]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:17 metasploitable login[5329]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:17 metasploitable login[5334]: pam_unix(login:auth): check pass; user unknown
+May 27 14:39:18 metasploitable login[5331]: FAILED LOGIN (3) on 'pts/3' FOR `UNKNOWN', User not known to the underlying authentication module
