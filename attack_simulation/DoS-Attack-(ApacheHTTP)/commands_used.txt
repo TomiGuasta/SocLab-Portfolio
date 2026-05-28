@@ -1,0 +1,89 @@
+=================================
+KALI LINUX — Pre Attack Validation
+=================================
+
+nmap -p 80 192.168.56.101
+
+Descripción:
+
+Verificación previa del estado del servicio HTTP
+sobre el puerto TCP/80 del host objetivo.
+
+Objetivo:
+
+Confirmar que Apache se encuentra activo,
+escuchando y accesible antes de iniciar
+la simulación.
+
+Resultado esperado:
+
+80/tcp open http
+
+
+==============================
+KALI LINUX — Attack Execution
+==============================
+
+ab -n 10000 -c 50 http://192.168.56.101/
+
+Descripción:
+
+-n 10000
+Cantidad total de requests HTTP generados.
+
+-c 50
+Cantidad de conexiones concurrentes.
+
+Objetivo:
+
+Simular presión operativa / HTTP Flood
+contra el servicio Apache.
+
+========================================
+METASPLOITABLE — Live Monitoring / SOC
+========================================
+
+top
+
+Descripción:
+
+Monitorización en tiempo real de:
+
+- CPU
+- memoria
+- procesos Apache
+- carga del sistema
+
+-----------------------------------------
+
+tail -f /var/log/apache2/access.log
+
+Descripción:
+
+Visualización continua de logs HTTP.
+
+Permite observar:
+
+- requests masivos
+- IP origen
+- User-Agent ApacheBench
+- timestamps del ataque
+
+-----------------------------------------
+
+watch -n1 'netstat -ant | grep :80 | wc -l'
+
+Descripción:
+
+Conteo dinámico de conexiones TCP activas
+relacionadas con el puerto 80.
+
+Objetivo:
+
+Observar en tiempo real el incremento de
+conexiones durante la simulación DoS.
+
+Indicador observado:
+
+crecimiento de conexiones HTTP concurrentes
+durante la ejecución de ApacheBench.
