@@ -2,8 +2,11 @@
 # Final Security Report — DVWA SQL Injection Assessment
 
 **Author:** Tomas Guastavino
+
 **Role Focus:** Blue Team / SOC Analyst / Application Security Learning Lab
+
 **Environment:** Kali Linux → Metasploitable2 → DVWA
+
 **Date:** 2026
 
 ---
