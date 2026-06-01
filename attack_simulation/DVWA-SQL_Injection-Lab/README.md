@@ -153,7 +153,7 @@ Extracción exitosa de hashes de usuarios.
 Las capturas y outputs completos se encuentran dentro de:
 
 ```txt
-evidence/
+Documents/
 ```
 
 ---
