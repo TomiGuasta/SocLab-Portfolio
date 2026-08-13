@@ -11,7 +11,7 @@ Utilizando una lista de passwds "guastayou.txt" que fue creada extrayendo 100 co
 
 Ataque de fuerza bruta contra el usuario `tomi` probando 101 contraseñas de un wordlist propio. Hydra encontró una contraseña válida: **1 of 1 target successfully completed, 1 valid password found**.
 
-(https://github.com/TomiGuasta/SocLab-Portfolio/blob/4a2998139907df72bf0381664d59b8a97bb8cb74/homelab-soc/docs/Hydra%20-%20BruteForce/Hydra%20Brute%20Force%20Attack.png)
+homelab-soc/docs/Hydra - BruteForce/Splunk Forwarder - Attack Report.png
 
 ## 2. Detección — Splunk
 
