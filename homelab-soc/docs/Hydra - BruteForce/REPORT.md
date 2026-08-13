@@ -7,6 +7,7 @@ Simulación de un ataque de fuerza bruta contra el servicio SSH de la máquina v
 ```bash
 hydra -l tomi -P /tmp/guastayou.txt ssh://<IP_VICTIMA>
 ```
+Utilizando una lista de passwds "guastayou.txt" que fue creada extrayendo 100 contraseñas de la lista incorporada que trae Hydra "rockyou.txt" + la contraseña del usuario para poder conseguir un ataque exitoso y posteriormente documentarlo.
 
 Ataque de fuerza bruta contra el usuario `tomi` probando 101 contraseñas de un wordlist propio. Hydra encontró una contraseña válida: **1 of 1 target successfully completed, 1 valid password found**.
 
