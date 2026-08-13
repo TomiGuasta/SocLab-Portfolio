@@ -10,7 +10,7 @@ hydra -l tomi -P /tmp/guastayou.txt ssh://<IP_VICTIMA>
 
 Ataque de fuerza bruta contra el usuario `tomi` probando 101 contraseñas de un wordlist propio. Hydra encontró una contraseña válida: **1 of 1 target successfully completed, 1 valid password found**.
 
-![Hydra Brute Force Attack](../../screenshots/Hydra_Brute_Force_Attack.png)
+[![Hydra Brute Force Attack](../../screenshots/Hydra_Brute_Force_Attack.png)](https://github.com/TomiGuasta/SocLab-Portfolio/blob/4a2998139907df72bf0381664d59b8a97bb8cb74/homelab-soc/docs/Hydra%20-%20BruteForce/Hydra%20Brute%20Force%20Attack.png)
 
 ## 2. Detección — Splunk
 
@@ -23,7 +23,7 @@ index=main sourcetype=linux_secure ("Failed password" OR "Accepted password")
 
 La query trae todos los eventos de autenticación SSH del Universal Forwarder de la víctima, extrae el resultado (`Failed`/`Accepted`), la IP de origen y el usuario, y los ordena cronológicamente. Se registraron **114 eventos** en la ventana analizada: una seguidilla de `Failed` para el usuario `tomi` desde la misma IP, hasta el evento final `Accepted` que confirma el login exitoso.
 
-![Splunk Forwarder - Attack Report](../../screenshots/Splunk_Forwarder_-_Attack_Report.png)
+[![Splunk Forwarder - Attack Report](../../screenshots/Splunk_Forwarder_-_Attack_Report.png)](https://github.com/TomiGuasta/SocLab-Portfolio/blob/4a2998139907df72bf0381664d59b8a97bb8cb74/homelab-soc/docs/Hydra%20-%20BruteForce/Splunk%20Forwarder%20-%20Attack%20Report.png)
 
 ## Resultado
 
