@@ -1,9 +1,8 @@
 # Detección: Port Scan (nmap) — 3 niveles de agresividad
 
-Serie de escaneos contra la máquina víctima (Ubuntu Server), de menor a mayor agresividad, para comparar cómo cambia la firma que dejan en los logs y qué tan fácil es detectarlos con la misma query.
+Serie de escaneos contra la máquina víctima (Ubuntu Server), de menor a mayor agresividad, intercambiando tambien la velocidad y la cantidad de puertos a analizar para comparar cómo cambia el "rastro" que dejan en los logs y qué tan fácil es detectarlos con la misma query.
 
-**Query de detección usada en los tres niveles** (sin cambios entre uno y otro):
-
+###Query Utilizada:
 ```spl
 index=main host=guasta-home sourcetype=linux_secure
 ("Connection closed" OR "Connection reset" OR "Did not receive identification string")
@@ -19,11 +18,12 @@ index=main host=guasta-home sourcetype=linux_secure
 nmap -sV <IP_VICTIMA>
 ```
 
-Solo top 1000 puertos con detección de versión. Encontró 2 puertos abiertos (22/ssh, 8089/ssl-http) en **35.31 segundos**.
+Escanea los primeros 1000 puertos (puertos generales) con detección de versión. Encontró 2 puertos abiertos (22/ssh, 8089/ssl-http).
+En este scan se busca la forma mas "burda" que hay de intentar conocer los puertos logicos abiertos, en un sistema operativo. Agregando el parametro -sV para conocer las versiones de los servicios que se alojan en esos puertos.
 
 
-
-**Detección en Splunk:** 4 eventos, todos concentrados en una ventana de **~32 segundos** — conexiones cortadas antes de autenticación (`[preauth]`, `kex_exchange_identification`).
+**Detección en Splunk:** 4 eventos ** — conexiones cortadas antes de autenticación (`[preauth]`, `kex_exchange_identification`).
+  "Basicamente la herramienta Nmap no intenta entrar en el puerto, sino que va analizando (con paquetes TCP/UDP) los puertos conocidos para que este le conteste y poder obtener el servicio que se aloja en ese puerto y obtener asi la informacion de este. "
 
 
 
@@ -35,7 +35,7 @@ Solo top 1000 puertos con detección de versión. Encontró 2 puertos abiertos (
 nmap -sV -sC -A -p- -T4 <IP_VICTIMA>
 ```
 
-Escaneo de los 65535 puertos, con scripts default (`-sC`) y modo agresivo (`-A`, incluye detección de SO). Completado en **~60 segundos** gracias a la velocidad `-T4`.
+Escaneo de los 65535 puertos, con scripts default (`-sC`) y modo agresivo (`-A`, incluye detección de SO). Ademas de agregarle el aprametro (-T4) que lo que permite es aumentar la velocidad del script , en una escala del 1-5 que dispone Nmap.
 
 
 
@@ -57,7 +57,7 @@ Mismo alcance que el nivel 2 (todos los puertos, scripts, modo agresivo) pero co
 
 **Detección en Splunk: sin resultados.** La misma query que detectó los niveles 1 y 2 no arrojó ningún evento durante los 30 minutos que corrió el escaneo.
 
-### Por qué no se detectó nada — y por qué esto es lo más importante de los tres niveles
+### Analisis de los resultados de Splunk a "los tres niveles" de script que se corrieron con Nmap a traves de Kali Linux.
 
 No es que el ataque no haya generado actividad; es que la detección tiene un **punto ciego** frente a este patrón:
 
@@ -67,7 +67,7 @@ No es que el ataque no haya generado actividad; es que la detección tiene un **
 
 ---
 
-## Comparación de los tres niveles
+## Comparación de los tres niveles | Parametros Tecnicos 
 
 | Nivel | Comando | Duración | Puertos | Eventos en Splunk | Detectado |
 |---|---|---|---|---|---|
