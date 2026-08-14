@@ -4,7 +4,7 @@ Serie de escaneos contra la máquina víctima (Ubuntu Server), de menor a mayor 
 
 ### Query Utilizada:
 ```spl
-index=main host=guasta-home sourcetype=linux_secure
+index=main host=<host-name> sourcetype=linux_secure
 ("Connection closed" OR "Connection reset" OR "Did not receive identification string")
 | table _time, _raw
 | sort _time
