@@ -21,11 +21,11 @@ nmap -sV <IP_VICTIMA>
 
 Solo top 1000 puertos con detección de versión. Encontró 2 puertos abiertos (22/ssh, 8089/ssl-http) en **35.31 segundos**.
 
-![Nmap Attack - Nivel 1](../../screenshots/nmap-attack-lvl1.png)
+
 
 **Detección en Splunk:** 4 eventos, todos concentrados en una ventana de **~32 segundos** — conexiones cortadas antes de autenticación (`[preauth]`, `kex_exchange_identification`).
 
-![Nmap Splunk Report - Nivel 1](../../screenshots/nmap-splunk-report-lvl1.png)
+
 
 ---
 
@@ -37,11 +37,11 @@ nmap -sV -sC -A -p- -T4 <IP_VICTIMA>
 
 Escaneo de los 65535 puertos, con scripts default (`-sC`) y modo agresivo (`-A`, incluye detección de SO). Completado en **~60 segundos** gracias a la velocidad `-T4`.
 
-![Nmap Attack - Nivel 2](../../screenshots/nmap-attack-lvl2.png)
+
 
 **Detección en Splunk:** también 4 eventos, en una ventana similar a la del nivel 1 (~15 segundos). A pesar de escanear 65 veces más puertos que el nivel 1, **la cantidad de eventos detectados no aumentó** — porque solo el puerto 22 (SSH) genera este tipo de log; el resto de los puertos cerrados no dejan rastro en `auth.log`.
 
-![Nmap Splunk Report - Nivel 2](../../screenshots/nmap-splunk-report-lvl2.png)
+
 
 ---
 
@@ -53,7 +53,7 @@ nmap -sV -sC -A -p- -T2 <IP_VICTIMA>
 
 Mismo alcance que el nivel 2 (todos los puertos, scripts, modo agresivo) pero con `-T2`, una velocidad deliberadamente lenta pensada para evadir detección. Se dejó correr **~30 minutos** y se cortó manualmente sin llegar a completar — para esa altura seguía en fase de SYN Stealth Scan.
 
-![Nmap Attack - Nivel 3](../../screenshots/nmap-attack-lvl3.png)
+
 
 **Detección en Splunk: sin resultados.** La misma query que detectó los niveles 1 y 2 no arrojó ningún evento durante los 30 minutos que corrió el escaneo.
 
