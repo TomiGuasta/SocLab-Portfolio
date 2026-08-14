@@ -2,7 +2,7 @@
 
 Serie de escaneos contra la máquina víctima (Ubuntu Server), de menor a mayor agresividad, intercambiando tambien la velocidad y la cantidad de puertos a analizar para comparar cómo cambia el "rastro" que dejan en los logs y qué tan fácil es detectarlos con la misma query.
 
-###Query Utilizada:
+### Query Utilizada:
 ```spl
 index=main host=guasta-home sourcetype=linux_secure
 ("Connection closed" OR "Connection reset" OR "Did not receive identification string")
