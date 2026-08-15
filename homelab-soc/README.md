@@ -10,9 +10,9 @@ No es un curso ni una guía teórica. Es el registro de un proceso de aprendizaj
 
 ## Objetivo
 
-- Entender de punta a punta el flujo de datos en un SIEM: desde que un evento ocurre en un endpoint hasta que un analista lo detecta y actúa sobre él.
-- Practicar la mentalidad ofensiva lo justo y necesario para saber qué señales deja un atacante — no para explotar en profundidad, sino para reconocer patrones desde el lado defensivo.
-- Desarrollar la habilidad de escribir queries SPL, reglas de auditoría y alertas propias, en vez de depender solo de detecciones prearmadas.
+- Entender de punta a punta el flujo de datos en un SIEM (SPLUNK): desde que un evento ocurre, hasta que un analista lo detecta y actúa sobre él.
+- Practicar la mentalidad ofensiva lo justo y necesario para saber qué señales deja un atacante — no para explotar en profundidad, sino para reconocer patrones desde el lado defensivo. Basicamente pensar como atacante para poder implementar la defensa que requiera el sistema.
+- Desarrollar la habilidad de escribir queries SPL, reglas de auditoría y alertas propias, en vez de depender solo de detecciones prearmadas. Paralelamente ir guardando esas queries, reglas y alertas para poder armar una especie de playbook, e ir familiarizandome con los conceptos mas generales para poder adaptarlos en diferentes escenarios.
 - Construir una base de conocimiento y un repositorio de detecciones reutilizable para cuando me toque aplicar esto profesionalmente.
 
 ## Arquitectura del lab
@@ -40,7 +40,7 @@ El entorno está armado con tres máquinas conectadas a la misma red local (mism
 
 **Ubuntu Server** es la máquina víctima — una laptop dedicada, con SSH habilitado como superficie de ataque principal, `auditd` configurado con reglas propias para detectar cambios críticos del sistema, y el Splunk Universal Forwarder mandando los logs relevantes al indexer.
 
-**PC principal (Windows)** corre Splunk Enterprise con licencia Free, actuando como el servidor central donde se reciben, indexan y analizan todos los eventos, y desde donde se configuran las alertas.
+**PC principal (Windows)** corre Splunk Enterprise, actuando como el servidor central donde se reciben, indexan y analizan todos los eventos, y desde donde se configuran las alertas.
 
 ## Qué se está monitoreando
 
@@ -48,7 +48,6 @@ El entorno está armado con tres máquinas conectadas a la misma red local (mism
 - `/var/log/syslog` — actividad general del sistema
 - `/var/log/audit/audit.log` — eventos de auditd según reglas propias (cambios en `/etc/passwd`, `/etc/shadow`, `/etc/sudoers`, ejecución de comandos, cambios en configuración SSH)
 
-Las reglas de auditoría usadas están documentadas en [`audit-rules/lab-soc.rules`](./audit-rules/lab-soc.rules).
 
 ## Metodología
 
@@ -60,7 +59,6 @@ El trabajo se organiza en ciclos por cada tipo de ataque:
 4. **Convertir la query en una detección/alerta** que dispare automáticamente ante ese patrón
 5. **Documentar** el ataque, la detección y los aprendizajes en este repositorio
 
-Las queries de búsqueda de uso general están en [`splunk-queries/spl-cheatsheet-soc.md`](./splunk-queries/spl-cheatsheet-soc.md), y las alertas específicas por tipo de ataque van quedando en `splunk-queries/detections/`.
 
 ## Ataques cubiertos (en progreso)
 
@@ -73,22 +71,14 @@ Las queries de búsqueda de uso general están en [`splunk-queries/spl-cheatshee
 
 Esta lista se va a ir ampliando a medida que el lab crece.
 
-## Alertas configuradas
-
-Splunk está configurado para enviar alertas por correo cuando se detectan patrones sospechosos, por ejemplo:
-
-- **Fuerza bruta SSH en curso**: más de N intentos fallidos desde una misma IP en una ventana de tiempo corta
-- **Fuerza bruta SSH exitosa**: una IP que tuvo intentos fallidos seguidos de un login aceptado — señal de que el ataque logró su objetivo
-
-La idea es seguir sumando alertas a medida que se incorporan nuevos tipos de ataque, generando así una librería propia de detecciones con sus correspondientes informes automáticos.
 
 ## Aprendizajes y troubleshooting
 
 Parte del valor de este proyecto estuvo en resolver problemas reales de configuración, muy similares a los que aparecen en un entorno de trabajo real:
 
 - Configuración de red mixta (WiFi + ethernet) sobre el mismo router para simular endpoints heterogéneos
+- Construir el setup de Ubuntu Server desde cero, desde la instalacion de su SO hasta las configuraciones para permitir Splunk Enterprise, poder habilitar servicios para su explotacion (controladamente), y realizar diferentes modificaciones para poder utilizar a favor del atacante para posteriormente documentarlas.
 - Errores de `illegal instruction` por incompatibilidad de instrucciones AVX entre la CPU del lab y binarios recientes de Splunk, resuelto usando una versión anterior
-- Gestión de licencias de Splunk (Trial vs Free) y sus limitaciones (por ejemplo, la licencia Free deshabilita ciertas funciones de administración multiusuario)
 - Diferencia entre `sourcetype` como etiqueta y las extracciones de campo reales — y por qué un Technology Add-on (TA) es necesario para que el parseo automático funcione
 - Instalación manual de un TA cuando la vía de instalación web no está disponible por restricciones de licencia
 
