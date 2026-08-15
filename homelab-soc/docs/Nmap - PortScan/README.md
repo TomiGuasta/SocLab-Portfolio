@@ -51,7 +51,7 @@ Escaneo de los 65535 puertos, con scripts default (`-sC`) y modo agresivo (`-A`,
 nmap -sV -sC -A -p- -T2 <IP_VICTIMA>
 ```
 
-Mismo alcance que el nivel 2 (todos los puertos, scripts, modo agresivo) pero con `-T2`, una velocidad deliberadamente lenta pensada para evadir detección. Se dejó correr **~30 minutos** y se cortó manualmente sin llegar a completar — para esa altura seguía en fase de SYN Stealth Scan.
+Mismo alcance que el nivel 2 (todos los puertos, scripts, modo agresivo) pero con `-T2`, una velocidad bastante lenta pensada para evadir detección. Se dejó correr **~30 minutos** y se cortó manualmente sin llegar a completar — para esa altura seguía en fase de SYN Stealth Scan(como se puede observar en la imagen documentada del splunk).
 
 
 
@@ -77,4 +77,4 @@ No es que el ataque no haya generado actividad; es que la detección tiene un **
 
 ## Conclusión
 
-El volumen de puertos escaneados no es lo que determina si un ataque se detecta — lo que importa es si genera **actividad sobre un servicio que efectivamente loguea eventos** (en este caso, SSH) y si esa actividad **cae dentro de la ventana temporal que la detección está mirando**. El nivel 3 demuestra que una detección efectiva contra escaneos rápidos puede ser completamente ciega ante la misma técnica ejecutada más despacio — una limitación real que en un SOC profesional se resolvería correlacionando además con logs de red/firewall (no solo logs de aplicación) y usando ventanas de análisis más largas para detectar patrones de baja frecuencia.
+Pude concluir a traves de las tres diferentes simulaciones, que el volumen de puertos escaneados no es lo que determina si un ataque se detecta — lo que importa es si genera **actividad sobre un servicio que efectivamente loguea eventos** (en este caso, SSH) y si esa actividad **cae dentro de la ventana temporal que la detección está mirando**. El nivel 3 demuestra que una detección efectiva contra escaneos rápidos puede ser completamente ciega ante la misma técnica ejecutada más despacio — una limitación real que en un SOC profesional se resolvería correlacionando además con logs de red/firewall (no solo logs de aplicación) y usando ventanas de análisis más largas para detectar patrones de baja frecuencia.
