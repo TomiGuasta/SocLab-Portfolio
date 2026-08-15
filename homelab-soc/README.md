@@ -4,7 +4,7 @@
 
 Este repositorio documenta un laboratorio casero que armé para profundizar mis conocimientos como **SOC Analyst**, combinando una perspectiva ofensiva (Red Team) con el enfoque defensivo que es el foco principal del proyecto (Blue Team).
 
-La idea central es simple: generar actividad maliciosa real en un entorno controlado, observar cómo esa actividad queda registrada en los logs, y construir sobre eso las herramientas que un analista SOC usa en el día a día — queries de búsqueda, reglas de detección y alertas automáticas.
+La idea es  generar actividad maliciosa real en un entorno controlado, utilizando diferentes herramientas y metodos que brinda Kali Linux, observar cómo esa actividad queda registrada en los logs, y construir sobre eso las herramientas que un analista SOC usa en el día a día — queries de búsqueda, reglas de detección y alertas automáticas, de a poco ir armando un playbook con todo lo utilizado en el lab que me sirva para el dia de mañana poder poner a prueba mis conocimientos en un entorno profesional.
 
 No es un curso ni una guía teórica. Es el registro de un proceso de aprendizaje activo: cada componente de este lab lo instalé, rompí, diagnostiqué y volví a levantar yo mismo, y ese proceso de troubleshooting es, en gran parte, tan valioso como el resultado final.
 
