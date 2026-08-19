@@ -17,22 +17,20 @@ No es un curso ni una guía teórica. Es el registro de un proceso de aprendizaj
 
 ## Arquitectura del lab
 
-El entorno está armado con tres máquinas conectadas a la misma red local (mismo router, combinando WiFi y ethernet):
+El entorno está armado con tres máquinas conectadas a la misma red local:
 
 ```
 ┌─────────────────────┐         ┌──────────────────────┐
-│   Kali Linux (VM)    │ ataca  │   Ubuntu Server        │
-│   Atacante            │ ──────▶│   (víctima)            │
-│   nmap, hydra, etc.   │        │   SSH, auditd, rsyslog │
+│   Kali Linux (VM)   │ ataca   │   Ubuntu Server      │
+│   Atacante          │ ──────▶ │   (víctima)         │
+│                     │         │                      │
 └─────────────────────┘         └──────────┬────────────┘
                                              │ Splunk Universal
                                              │ Forwarder (puerto 9997)
                                              ▼
                                   ┌──────────────────────┐
-                                  │  PC principal          │
-                                  │  Splunk Enterprise      │
-                                  │  (indexer + búsquedas   │
-                                  │   + alertas por mail)   │
+                                  │  PC principal        │
+                                  │  Splunk Enterprise   │
                                   └──────────────────────┘
 ```
 
