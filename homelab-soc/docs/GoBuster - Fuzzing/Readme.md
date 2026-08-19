@@ -24,7 +24,7 @@ sudo mkdir /var/www/html/backup
 echo "<h1>Panel de administración (prueba)</h1>" | sudo tee /var/www/html/admin/index.html
 echo "backup viejo, no debería estar expuesto" | sudo tee /var/www/html/backup/notas.txt
 
-# Serian rutas ocultas que suelen ser las mas buscadas a la hora de atacar con fuzzing un servidor web.
+### Serian rutas ocultas que suelen ser las mas buscadas a la hora de atacar con fuzzing un servidor web.
 
 ## 4. Configurar Splunk para mandar los logs de Apache
 bash
@@ -48,13 +48,13 @@ dir → modo de fuzzing de directorios/archivos
 -w → el wordlist (dirb/common.txt viene instalado por default en Kali)
 
 
-### 7. Querie ordenada por tiempo, IP, método utilizado, ubicación del directorio y condición (Encontrada o no)
+## 7. Querie ordenada por tiempo, IP, método utilizado, ubicación del directorio y condición (Encontrada o no)
 
 index=main sourcetype=access_combined
 | table _time, clientip, method, uri, status
 | sort _time
 
-# Filtrado por condición distinto a 404 ("No encontrado") y por IP de Kali Linux como atacante:
+### Filtrado por condición distinto a 404 ("No encontrado") y por IP de Kali Linux como atacante:
 
 index=main sourcetype=access_combined status!=404 clientip=192.168.0.36
 | table _time, clientip, method, uri, status
