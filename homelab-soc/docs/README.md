@@ -1,2 +1,2 @@
 # Docs
-- Bitácora de ataques probados y cómo se vieron reflejados en los logs
+- Bitácora de ataques probados y cómo se vieron reflejados en Splunk Enterprise
