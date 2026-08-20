@@ -28,7 +28,7 @@ index=main sourcetype=access_combined clientip=<IP_KALI>
 ## Paso 2 — Fuzzing con extensiones específicas
 
 ```bash
-gobuster dir -u http://<IP_UBUNTU>/dvwa/ -w /usr/share/wordlists/dirb/common.txt -x php,txt,bak,inc
+gobuster dir -u http://<IP>/dvwa/ -w /usr/share/wordlists/dirb/common.txt -x php,txt,bak,inc
 ```
 
 El flag `-x` agrega cada extensión a las palabras del wordlist (`admin.php`, `config.inc`, `backup.bak`, etc.) — mas general y real, porque en una aplicación PHP como DVWA la mayoría del contenido interesante son archivos con extensión, no carpetas sueltas.
@@ -48,7 +48,7 @@ index=main sourcetype=access_combined clientip=<IP_KALI>
 ## Paso 3 — Fuzzing dentro de `/vulnerabilities/`
 
 ```bash
-gobuster dir -u http://<IP_UBUNTU>/dvwa/vulnerabilities/ -w /usr/share/wordlists/dirb/common.txt
+gobuster dir -u http://<IP>/dvwa/vulnerabilities/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
 Escaneo dirigido a la carpeta donde viven los módulos vulnerables de DVWA — el objetivo es mapear qué vulnerabilidades están disponibles antes de decidir por dónde atacar, tal como lo haría un atacante real perfilando la superficie de ataque.
