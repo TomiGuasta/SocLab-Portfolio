@@ -1,6 +1,6 @@
 # SocLab-Portfolio
 
-Repositorio con mis proyectos de práctica en ciberseguridad defensiva y ofensiva, documentando el proceso de aprendizaje desde ejercicios introductorios hasta un entorno de detección completo con SIEM.
+Repositorio con mis proyectos de práctica en ciberseguridad con enfoque defensivo pero tambien tratando con la parte de ataque, documentando el proceso de aprendizaje desde ejercicios introductorios hasta un entorno de detección completo con SIEM, que es el que actualmente estoy trabajando.
 
 ## 📂 Proyectos
 
