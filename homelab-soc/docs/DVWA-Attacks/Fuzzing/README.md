@@ -66,7 +66,7 @@ index=main sourcetype=access_combined clientip=<IP_KALI> uri="*vulnerabilities*"
 
 ---
 
-## Resumen
+## Resumen del ataque
 
 | Paso | Objetivo | Hallazgo principal |
 |---|---|---|
