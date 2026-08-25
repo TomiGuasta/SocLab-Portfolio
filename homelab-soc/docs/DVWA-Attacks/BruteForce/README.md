@@ -1,6 +1,6 @@
-# 03 — Brute Force contra el login de DVWA
+Brute Force contra el login de DVWA
 
-Ataque de fuerza bruta con Hydra contra el módulo **Brute Force** de DVWA (nivel de seguridad Low), atacando el formulario de login vía HTTP en vez de SSH — mismo objetivo conceptual que el ataque a SSH, pero contra un protocolo sin estructura fija de autenticación.
+Ataque de fuerza bruta con Hydra contra el módulo **Brute Force** de DVWA (nivel de seguridad Low) — 
 
 ## Comando base utilizado
 
@@ -31,7 +31,6 @@ Se planteó la hipótesis de que la sesión de DVWA expiraba a mitad del ataque,
 
 **Resultado:** el número de falsos positivos bajó de 16 a un rango de **1 a 4**, pero seguía sin ser el resultado limpio esperado (1 sola contraseña válida). Se observó además un patrón: la cantidad de falsos positivos escalaba junto con el valor de `-t` usado (más threads simultáneos → más falsos positivos), y todos correspondían a las primeras contraseñas del wordlist, no a posiciones aleatorias.
 
-![Hydra - ataques con distintos valores de -t](../../screenshots/hydra-dvwa-brute-attempts.png)
 
 | Threads (`-t`) | Contraseñas marcadas como "válidas" |
 |---|---|
@@ -59,9 +58,6 @@ Se probó cada contraseña marcada como "válida" en los tres intentos, directam
 
 El patrón observado entre los tres intentos — el número de falsos positivos cae a medida que baja la concurrencia, hasta desaparecer por completo con `-t 1` — indica que la causa está relacionada con **el manejo de sesión de PHP bajo múltiples requests simultáneos**, no con expiración por tiempo (el ajuste de `session.gc_maxlifetime` no tuvo efecto por sí solo). Con varios threads atacando la misma `PHPSESSID` al mismo tiempo, el servidor parece devolver respuestas inconsistentes en los primeros intentos, antes de estabilizarse — probablemente por cómo PHP bloquea el archivo de sesión ante accesos concurrentes al mismo identificador. No se profundizó más allá de este punto por estar fuera del alcance del ejercicio.
 
-## Por qué se documenta esto igual (y por qué importa)
-
-Este resultado, aunque no sea un ataque "limpio", es un hallazgo válido en sí mismo: demuestra que **las herramientas de ataque automatizado pueden generar falsos positivos**, especialmente contra aplicaciones con manejo de sesión particular (como DVWA con concurrencia HTTP). La lección aplicable a un rol de SOC/analista no es solo "encontrar una alerta", sino **verificar manualmente antes de escalar un hallazgo como confirmado** — un analista que reporta 4 credenciales comprometidas cuando solo 1 es real genera ruido innecesario y erosiona la confianza en sus reportes.
 
 ## Detección en Splunk
 
@@ -73,7 +69,6 @@ index=main sourcetype=access_combined uri="*brute*" clientip=<IP_KALI>
 
 A diferencia de SSH (que distingue `Failed password` / `Accepted password` como eventos separados), **HTTP no distingue éxito o fracaso de autenticación a nivel de protocolo** — todos los requests devuelven status `200` (la página siempre carga), haya acertado la contraseña o no. Por eso, para detectar este tipo de ataque en logs web, la señal no está en el `status`, sino en el **volumen de requests a la misma ruta desde la misma IP en poco tiempo** — el mismo principio de detección que se usó para SSH, adaptado a que acá el criterio de "éxito" no es visible en el código de respuesta.
 
-![Detección en Splunk - requests a /brute/](../../screenshots/splunk-dvwa-brute-detection.png)
 
 ## Resumen
 
