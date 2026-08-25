@@ -18,12 +18,8 @@ ab -n 5000 -c 100 http://192.168.0.28/dvwa/
 - `-n 5000` → 5000 requests totales
 - `-c 100` → 100 requests simultáneos
 
-**Qué pasó:** el volumen de tráfico saturó Apache al punto de dejarlo sin responder. Después de correr el ataque, la web dejó de cargar por completo — ni el navegador ni `curl` obtenían respuesta:
+**Qué pasó:** el volumen de tráfico saturó Apache al punto de dejarlo sin responder. Después de correr el ataque, la web dejó de cargar por completo.
 
-```bash
-curl -I http://192.168.0.28/dvwa/
-```
-(sin respuesta / timeout)
 
 ## Diagnóstico y recuperación
 
@@ -55,7 +51,6 @@ slowloris 192.168.0.28 -p 80
 
 **Resultado:** `Socket count: 0`. Slowloris no pudo abrir ninguna conexión real, porque Apache todavía no estaba respondiendo tras el Ataque 1 — no había nada que "colgar", las conexiones se rechazaban de entrada.
 
-![Slowloris - primer intento, socket count 0](../../screenshots/slowloris-intento-fallido.png)
 
 ### Segundo intento — exitoso, tras recuperar Apache
 
@@ -77,15 +72,6 @@ El contador subió hasta **150 conexiones simultáneas** — coincidiendo con la
 
 ## Detección en Splunk
 
-### Lo esperado que no funcionó: `access_combined`
-
-```spl
-index=main sourcetype=access_combined clientip=192.168.0.36
-| timechart span=1s count
-```
-
-No mostró nada relevante durante el DoS. Explicación: Apache solo escribe en `access.log` cuando un request **se completa** — ni el volumen de Apache Bench (que sí completa requests, pero el log no diferencia entre carga normal y ataque salvo por el pico de volumen) ni las conexiones incompletas de Slowloris (que nunca terminan) generan el tipo de evento que esta detección esperaba ver con claridad.
-
 ### Donde sí apareció evidencia: `apache_error`
 
 ```spl
@@ -96,8 +82,6 @@ index=main sourcetype=apache_error
 
 Reveló una secuencia de **6 reinicios de Apache en aproximadamente 12 minutos** (`caught SIGWINCH, shutting down gracefully` seguido de `resuming normal operations`) — un patrón de caídas y recuperaciones repetidas que no ocurre en operación normal, y que coincide con la ventana de tiempo en la que se ejecutaron los ataques y los reinicios manuales de recuperación.
 
-![Splunk - reinicios repetidos de Apache en apache_error](../../screenshots/splunk-apache-error-restarts.png)
-
 ---
 
 ## Verificación final — recuperación completa del entorno
@@ -105,7 +89,6 @@ Reveló una secuencia de **6 reinicios de Apache en aproximadamente 12 minutos**
 ```bash
 sudo systemctl status apache2
 sudo systemctl status mysql
-curl -I http://192.168.0.28/dvwa/
 ```
 
 Todos los servicios confirmados operativos, la web respondiendo con normalidad tras finalizar las pruebas.
