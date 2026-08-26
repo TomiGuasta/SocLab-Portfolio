@@ -1,4 +1,5 @@
-# 05 — SQL Injection contra DVWA (con extracción y cracking de credenciales)
+# SQL Injection contra DVWA 
+## + Hashing y Crackeo de credenciales almacenadas.
 
 Ataque en tres etapas contra el módulo SQL Injection de DVWA: bypass de la lógica de consulta, extracción de las credenciales almacenadas en la base de datos, y cracking de los hashes obtenidos.
 
@@ -65,17 +66,11 @@ hashcat -m 0 -a 0 -D 1 /tmp/hashes_dvwa.txt /usr/share/wordlists/rockyou.txt
 | 1337 | `0d107d09f5bbe40cade3de5c71e9db7` | `letmein` |
 | pablo | `8d3533d75ae2c3966d7e0d4fcc69216b` | `charley` |
 
-![Hashcat - cracking completo de los 4 hashes](../../screenshots/hashcat-dvwa-report.png)
 
 ---
 
 ## Detección en Splunk
 
-Se repitió el envío del payload usando `curl` desde Kali (en vez del navegador), para mantener consistencia con el resto de la documentación, donde todos los ataques se atribuyen a la IP de Kali:
-
-```bash
-curl "http://192.168.0.28/dvwa/vulnerabilities/sqli/?id=1%27+OR+%271%27%3D%271&Submit=Submit#" -b "PHPSESSID=<cookie>; security=low"
-```
 
 **Query de detección:**
 
@@ -103,4 +98,4 @@ El payload SQL queda visible directamente en la URL, codificado (`%27` = `'`, `%
 
 ## Interpretación
 
-Este ataque muestra el ciclo completo de un compromiso de credenciales vía aplicación web: una vulnerabilidad de validación de input (SQLi) no solo permite ver datos que no deberían ser accesibles, sino que puede escalar directamente a **robo total de la base de usuarios**. El uso de MD5 sin salt como algoritmo de hash agrava el impacto — es un algoritmo rápido de crackear por fuerza bruta/diccionario, a diferencia de algoritmos diseñados para almacenamiento de contraseñas (bcrypt, argon2), que son deliberadamente lentos para dificultar este mismo ataque.
+Este ataque muestra el ciclo completo de un compromiso de credenciales vía aplicación web: una vulnerabilidad de validación de input (SQLi) no solo permite ver datos que no deberían ser accesibles, sino que puede escalar directamente a **robo total de la base de usuarios**. El uso de MD5 sin salt (cadena de datos aleatoria para dificultar el crackeo) como algoritmo de hash agrava el impacto — es un algoritmo rápido de crackear por fuerza bruta/diccionario, a diferencia de algoritmos diseñados para almacenamiento de contraseñas (bcrypt, argon2), que son deliberadamente lentos para dificultar este mismo ataque.
