@@ -74,7 +74,7 @@ index=main sourcetype=access_combined clientip=<IP_KALI> uri="*vulnerabilities*"
 | sort _time
 ```
 
-![Splunk Fuzzing 3](https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/blob/main/homelab-soc/docs/DVWA-Attacks/Fuzzing/Splunk%20-%203st%20DVWA%20Fuzzing%20Vuln.png?raw=true)
+![Splunk Fuzzing 3]((https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/main/homelab-soc/docs/DVWA-Attacks/Fuzzing/Splunk%20-%203st%20DVWA%20Fuzzing%20Vuln.png)
 
 ---
 
