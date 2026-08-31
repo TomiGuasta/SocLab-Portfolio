@@ -5,10 +5,9 @@
 
   Comando base utilizado
 
-   1 hydra -l admin -P /tmp/guastayou.txt 192.168.0.28 http-get-form \
-   2 "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:F=User
-     name and/or password incorrect" \
-   3 -c "PHPSESSID=<valor>; security=low"
+   hydra -l admin -P /tmp/guastayou.txt 192.168.0.28 http-get-form \
+   "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:F=Username and/or password incorrect" \
+   -c "PHPSESSID=<valor>; security=low"
 
    - http-get-form → módulo de Hydra para atacar formularios de login enviados por
      GET
@@ -26,8 +25,7 @@
   la cookie de sesión inicial, sin ajustes adicionales.
 
   !Ejecución Intento 1
-  (https://github.com/TomiGuasta/SocLab-Portfolio/blob/main/homelab-soc/docs/DVWA-Att
-  acks/BruteForce/DVWA%20BruteForce%20-%20Hydra.png)
+  (https://github.com/TomiGuasta/SocLab-Portfolio/blob/main/homelab-soc/docs/DVWA-Attacks/BruteForce/DVWA%20BruteForce%20-%20Hydra.png)
 
   Resultado: Hydra marcó 16 contraseñas como válidas — un número imposible para un
   solo usuario con una sola contraseña real, señal clara de falsos positivos.
@@ -44,8 +42,7 @@
      3), con una cookie de sesión renovada en cada corrida
 
   !Ejecución Intento 2
-  (https://github.com/TomiGuasta/SocLab-Portfolio/blob/main/homelab-soc/docs/DVWA-Att
-  acks/BruteForce/DVWA%20BruteForce-%202nd%20Attack.png)
+  (https://github.com/TomiGuasta/SocLab-Portfolio/blob/main/homelab-soc/docs/DVWA-Attacks/BruteForce/DVWA%20BruteForce-%202nd%20Attack.png)
 
   Resultado: el número de falsos positivos bajó de 16 a un rango de 1 a 4, pero
   seguía sin ser el resultado limpio esperado (1 sola contraseña válida). Se observó
