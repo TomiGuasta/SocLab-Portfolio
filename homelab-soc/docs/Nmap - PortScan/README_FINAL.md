@@ -14,7 +14,7 @@ index=main host=<host-name> sourcetype=linux_secure
 
 ## Nivel 1 — Básico
 
-![Nmap Attack](https://raw.githubusercontent.com/[USER]/[REPO]/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack.png)
+![Nmap Attack](https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack.png)
 
 ```bash
 nmap -sV <IP_VICTIMA>
@@ -26,13 +26,13 @@ En este scan se busca la forma mas "burda" que hay de intentar conocer los puert
 
 **Detección en Splunk:** 4 eventos ** — conexiones cortadas antes de autenticación (`[preauth]`, `kex_exchange_identification`).
 
-![Nmap Splunk Report](https://raw.githubusercontent.com/[USER]/[REPO]/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Splunk%20Report.png)
+![Nmap Splunk Report](https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Splunk%20Report.png)
 
 ---
 
 ## Nivel 2 — Intermedio (todos los puertos, rápido)
 
-![Nmap Attack Lvl 2](https://raw.githubusercontent.com/[USER]/[REPO]/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack%20lvl%202.png)
+![Nmap Attack Lvl 2](https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack%20lvl%202.png)
 
 ```bash
 nmap -sV -sC -A -p- -T4 <IP_VICTIMA>
@@ -44,14 +44,14 @@ Escaneo de los 65535 puertos, con scripts default (`-sC`) y modo agresivo (`-A`,
 
 **Detección en Splunk:** también 4 eventos, en una ventana similar a la del nivel 1 (~15 segundos). A pesar de escanear 65 veces más puertos que el nivel 1, **la cantidad de eventos detectados no aumentó** — porque solo el puerto 22 (SSH) genera este tipo de log; el resto de los puertos cerrados no dejan rastro en `auth.log`.
 
-![Nmap Splunk Report Lvl 2](https://raw.githubusercontent.com/[USER]/[REPO]/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Splunk%20Report%20lvl%202.png)
+![Nmap Splunk Report Lvl 2](https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Splunk%20Report%20lvl%202.png)
 
 ---
 
 ## Nivel 3 — Agresivo y lento (el más pesado)
 
-![Nmap Attack Lvl 3 T2](https://raw.githubusercontent.com/[USER]/[REPO]/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack%20lvl%203%20T2.png)
-![Nmap Attack Lvl 3 T4](https://raw.githubusercontent.com/[USER]/[REPO]/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack%20lvl%203%20T4.png)
+![Nmap Attack Lvl 3 T2](https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack%20lvl%203%20T2.png)
+![Nmap Attack Lvl 3 T4](https://raw.githubusercontent.com/TomiGuasta/SocLab-Portfolio/main/Labs/soc/_assets/Nmap%20-%20PortScan/Nmap%20-%20Attack%20lvl%203%20T4.png)
 
 ```bash
 nmap -sV -sC -A -p- -T2 <IP_VICTIMA>
