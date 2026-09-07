@@ -1,62 +1,54 @@
 ---
 tipo: "Playbook"
-categoria: "Network-Attacks"
-estado: "Finalizado"
-fecha: 2026-09-04
+categoria: "Web Security"
+estado: "Documentado"
+fecha: 2026-09-07
 táctica: "Credential Access"
-técnica_asociada: "T1110.001 - Password Guessing"
+técnica_asociada: "T1110.001"
 ---
 
-# Playbook: Fuerza Bruta SSH (Hydra)
+# Playbook: Hydra - Brute Force
 
-## 0. Resumen de Activo
-*   **Servicio/Puerto Atacado:** ==SSH / 22/TCP==
+## 0. Resumen de Activo y Telemetría
+*   **Servicio/Puerto:** SSH (22) / HTTP (80/443)
+*   **Log Sources (SIEM):** `auth.log` (SSH), `access_log` (Web/DVWA)
+*   **Criticidad del Activo:** Alta
 
 ## 1. Disparadores (Triggers)
-*   **Alerta SIEM:** Múltiples fallos de autenticación SSH (`Failed password`) desde una misma IP en un intervalo corto.
-*   **IoC detectado:** Picos inusuales en `/var/log/auth.log` con patrón repetitivo de `Failed password`.
-*   **Patrones de Comportamiento (Alta Fidelidad):**
-    *   **AN1522 (Patrón crítico):** Fallos repetidos seguidos de éxito desde la misma IP.
-    *   **AN1523:** Fallos de `sshd` con nombres de usuario repetidos.
-    *   Correlación de intentos simultáneos contra múltiples cuentas desde la misma fuente.
+*   **Alerta SIEM:** Múltiples fallos de autenticación seguidos de un éxito.
+*   **IoC detectado:** IP origen haciendo múltiples peticiones POST/LOGIN con distintos usuarios.
+*   **Patrones de Comportamiento:** Patrón "Fallo-Fallo-Éxito" o ráfaga de intentos fallidos en tiempo corto.
 
-## 2. Análisis Inicial (Investigación)
-*   **Queries de validación (Splunk):**
+## 2. Análisis Inicial y Evidencia (Lab)
+*   **Comandos de Ataque/Validación:**
+    ```bash
+    # Hydra Brute Force
+    hydra -l admin -P passlist.txt ssh://192.168.0.28
+    ```
+*   **Query de Validación (SIEM):**
     ```spl
-    index=main sourcetype=linux_secure "Failed password"
-    | stats count by src_ip, user
+    index=main (sourcetype=auth OR sourcetype=access_combined)
+    | stats count by src_ip, user, action
     | where count > 10
     ```
-*   **Verificación de logs:**
-    *   Revisar `grep "Failed password" /var/log/auth.log`.
-    *   Validar protocolos adicionales (AN1525: SNMP, Telnet).
-    *   Buscar eventos `Accepted password` tras fallos (AN1522).
-*   **Contexto de Infraestructura:** Clasificado como **Password Guessing** (Iteración sobre usuario específico).
-*   <details><summary><b>Otros puertos/servicios vulnerables a este ataque</b></summary>
-
-    *   **RDP:** 3389/TCP | **SMB:** 445/TCP | **MSSQL:** 1433/TCP | **MySQL:** 3306/TCP | **LDAP:** 389/TCP | **SNMP:** 161/UDP
-    </details>
+*   **Output Esperado (Logs/Terminal):**
+    ```text
+    [+] Target: 192.168.0.28
+    [+] Password: password123
+    [+] Authentication success
+    ```
 
 ## 3. Acciones de Respuesta
-*   **Contención:** 
-    *   Bloquear IP (firewall): `sudo ufw deny from <SRC_IP> to any port 22`.
-    *   Terminar sesiones afectadas: `pkill -u <USER>`.
-    *   **Alerta de Mitigación (M1036):** No implementar bloqueos demasiado estrictos que provoquen DoS auto-infligido.
-*   **Erradicación:**
-    *   Cambio de credenciales.
-    *   Implementar SSH Keys + Deshabilitar `PasswordAuthentication` en `/etc/ssh/sshd_config`.
-*   **Recuperación:**
-    *   Verificar integridad.
-    *   Reiniciar SSH: `sudo systemctl restart ssh`.
+*   **Contención:** Bloquear la IP atacante en Firewall (iptables/ufw).
+*   **Erradicación:** Cambiar contraseñas comprometidas, forzar cierre de sesiones activas, habilitar MFA.
+*   **Recuperación:** Validar acceso legítimo tras cambios de credenciales.
 
-## 4. Inteligencia de Amenazas y Enriquecimiento Técnico
-*   **Matriz MITRE:** [T1110.001 - Password Guessing](https://attack.mitre.org/techniques/T1110/001/)
-*   **Actores/Herramientas:**
-    *   *Herramientas:* **Hydra**, **CrackMapExec**, **Xbash**.
-    *   *Actores:* **APT28**, **APT29**, **VOID MANTICORE**.
-*   **Mitigaciones Operativas (MITRE):**
-    *   **M1032:** Habilitación de MFA (obligatorio en servicios expuestos).
-    *   **M1036:** Políticas de acceso condicional (bloqueo de proxies/VPNs).
-    *   **M1051:** Actualización de software para forzar políticas de complejidad.
-*   **Laboratorio/Writeup:** [[Attack/soc/docs/Network-Attacks/Hydra - BruteForce/SSH-BruteForce|Fuerza Bruta SSH contra Ubuntu Server]]
-*   **Tooling/Scripts:** [[/]]
+## 4. Resultados Esperados (Validación)
+*   Mensajes de "Accepted password" en `auth.log` o "HTTP 200 OK" tras múltiples "401 Unauthorized" en Web.
+
+## 5. Threat Hunting (Post-Incidente)
+*   Buscar uso de credenciales comprometidas en otros servicios.
+*   Revisar creación de nuevos usuarios o cambio de permisos (escalada de privilegios).
+
+## 6. Referencias MITRE
+*   Técnica: [T1110.001 - Brute Force: Password Guessing](https://attack.mitre.org/techniques/T1110/001/)
