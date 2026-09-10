@@ -1,8 +1,8 @@
-# 🏗️ Arquitectura del Laboratorio (SOC Lab)
+#  Arquitectura del Laboratorio (SOC Lab)
 
 Este documento detalla la estructura lógica y física de mi entorno de pruebas de ciberseguridad.
 
-## 🗺️ Diagrama de Arquitectura
+##  Diagrama de Arquitectura
 
 ```mermaid
 graph TB
@@ -11,17 +11,17 @@ graph TB
     classDef victim fill:#dfd,stroke:#0f0,stroke-width:2px;
     classDef siem fill:#ddf,stroke:#00f,stroke-width:2px;
 
-    subgraph Internet_Zone [Simulated Network 192.168.0.0/24]
+    subgraph Internet_Zone [Simulated Network 192.168.0.x]
         KALI[Kali Linux<br/>Attacker<br/>192.168.0.36]:::attacker
     end
 
-    subgraph Defense_Lab [Lab Network 192.168.1.0/24]
-        subgraph Victim_Host [Ubuntu Server 192.168.1.10]
+    subgraph Defense_Lab [Lab Network 192.168.1.x]
+        subgraph Victim_Host [Ubuntu Server 192.168.1.x]
             DVWA[App: DVWA]
             FW[Python Firewall + Iptables]
             AUDITD[Auditd Logger]
         end
-        SPLUNK[Splunk SIEM<br/>192.168.1.20]:::siem
+        SPLUNK[Splunk SIEM<br/>192.168.1.x]:::siem
     end
 
     %% Flujos de Ataque
