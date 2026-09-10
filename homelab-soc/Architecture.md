@@ -1,6 +1,6 @@
 # 🏗️ Arquitectura del Laboratorio (SOC Lab)
 
-Este documento detalla la estructura lógica y física de mi entorno de pruebas de ciberseguridad.
+Este documento detalla la estructura lógica y física de mi entorno de pruebas de ciberseguridad, consolidando la información del proyecto y los recursos relacionados.
 
 ## 🗺️ Diagrama de Arquitectura
 
@@ -51,4 +51,14 @@ graph TB
     *   Integración con fuentes externas para Threat Intelligence.
 
 ---
-*Documentación creada para dar contexto al flujo de trabajo del SOC Lab.*
+
+## 📚 Información del Proyecto y Recursos
+
+Repositorio con mis proyectos de práctica en ciberseguridad con enfoque defensivo pero también tratando con la parte de ataque, documentando el proceso de aprendizaje desde ejercicios introductorios hasta un entorno de detección completo con SIEM, que es el que actualmente estoy trabajando.
+
+- **Documentación de Ataques y Playbooks**: Accede a la documentación completa en GitHub: [Ver Documentación y Playbooks](https://github.com/TomiGuasta/SocLab-Portfolio/tree/main/homelab-soc/docs)
+
+### 📂 Proyectos principales
+
+#### [`homelab-soc/`](./homelab-soc)
+Laboratorio de detección propio, montado desde cero con Kali Linux, Ubuntu Server y Splunk Enterprise. Simulo ataques reales (fuerza bruta SSH, escaneo de puertos, fuzzing web, explotación de una aplicación vulnerable) y construyo las detecciones correspondientes: reglas de auditoría, queries SPL, y documentación de cada hallazgo con su análisis y remediación. Es mi proyecto principal — el que mejor refleja cómo trabajo end-to-end, desde generar el ataque hasta detectarlo y explicar por qué importa.
