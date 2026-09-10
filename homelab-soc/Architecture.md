@@ -58,7 +58,4 @@ Repositorio con mis proyectos de práctica en ciberseguridad con enfoque defensi
 
 - **Documentación de Ataques y Playbooks**: Accede a la documentación completa en GitHub: [Ver Documentación y Playbooks](https://github.com/TomiGuasta/SocLab-Portfolio/tree/main/homelab-soc/docs)
 
-### 📂 Proyectos principales
 
-#### [`homelab-soc/`]
-Laboratorio de detección propio, montado desde cero con Kali Linux, Ubuntu Server y Splunk Enterprise. Simulo ataques reales (fuerza bruta SSH, escaneo de puertos, fuzzing web, explotación de una aplicación vulnerable) y construyo las detecciones correspondientes: reglas de auditoría, queries SPL, y documentación de cada hallazgo con su análisis y remediación. Es mi proyecto principal — el que mejor refleja cómo trabajo end-to-end, desde generar el ataque hasta detectarlo y explicar por qué importa.
