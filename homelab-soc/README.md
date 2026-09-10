@@ -89,22 +89,3 @@ Parte del valor de este proyecto estuvo en resolver problemas reales de configur
 ---
 
 *Este es un proyecto personal de aprendizaje. Todas las máquinas involucradas son de mi propiedad y están aisladas para fines exclusivamente educativos.*
-
-
-
-graph TD
- subgraph Atacante
-    KALI[Kali Linux VM<br/>Attacker Tools]
-end
-
-subgraph "SOC Lab Environment"
-  UBUNTU[Ubuntu Server<br/>DVWA + Firewall]
-  SPLUNK[Splunk SIEM<br/>Log Aggregation]
-end
-
-KALI -- "Simulated Attacks<br/>(SSH, Web, Fuzzing)" --> UBUNTU
-UBUNTU -- "Logs (Forwarder)" --> SPLUNK
-SPLUNK -- "Alerting/Monitoring" --> KALI
-
-style UBUNTU fill:#f9f,stroke:#333,stroke-width:2px
-style SPLUNK fill:#ccf,stroke:#333,stroke-width:2px
