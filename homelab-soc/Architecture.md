@@ -12,7 +12,7 @@ graph TB
     classDef siem fill:#ddf,stroke:#00f,stroke-width:2px;
 
     subgraph Internet_Zone [Simulated Network 192.168.0.x]
-        KALI[Kali Linux<br/>Attacker<br/>192.168.0.36]:::attacker
+        KALI[Kali Linux<br/>Attacker<br/>192.168.0.x]:::attacker
     end
 
     subgraph Defense_Lab [Lab Network 192.168.1.x]
