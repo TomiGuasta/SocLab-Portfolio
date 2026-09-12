@@ -1,29 +1,31 @@
 ---
 tags: [infraestructura, siem, splunk, blue-team, telemetry]
 fecha: 2026-08-31
-hostname: windows-host
-ip: 192.168.0.X
-licencia: Splunk Free
-parent: [[Setup.md]]
+componente: SIEM
+hostname: splunk-server
+ip_ejemplo: 192.168.1.5
+rol: Centralización y Análisis de Telemetría
 ---
 
 # 📊 SIEM: Splunk Enterprise
 
-## 📌 Información General
-Servidor SIEM alojado en el host principal de desarrollo. Ingiere y centraliza la telemetría enviada en tiempo real por el *Splunk Universal Forwarder* instalado en el Ubuntu Server.
+## 🌐 Contexto de Infraestructura (IaC Template)
+Servidor SIEM configurado para la ingestión y análisis de telemetría proveniente de los endpoints del laboratorio.
 
-* **SO Host:** Windows (Conexión Ethernet)
-* **Puerto Web UI:** `8000` (`http://localhost:8000`)
-* **Puerto REST API:** `8089` (Utilizado por `check_bruteforce.py`)
+* **Dirección IP:** `{{SIEM_IP}}` (Ejemplo: `192.168.1.5`)
+* **Puerto Web UI:** `8000` (`http://{{SIEM_IP}}:8000`)
+* **Puerto REST API:** `8089` (Utilizado para automatización y scripts)
 * **Puerto Ingestion:** `9997` (Recepción desde Universal Forwarder)
 
----
+## 🔌 Configuración de Ingestión
+Se ha configurado el Add-on `Splunk_TA_nix` para normalizar los logs recibidos desde los endpoints Linux:
 
-## 🔌 Configuración del Ingestion (`Splunk_TA_nix`)
+* **Fuerza Bruta (SSH/Sudo):** sourcetype `linux_secure` (`/var/log/auth.log`)
+* **Web Exploitation (DVWA):** sourcetype `access_combined` (`/var/log/apache2/access.log`)
+* **DoS Patterns:** sourcetype `apache_error` (`/var/log/apache2/error.log`)
+* **Integridad (Kernel/Archivos):** sourcetype `auditd` (`/var/log/audit/audit.log`)
 
-Dado el uso de la **licencia Free** de Splunk (que limita ciertas funciones nativas de la App de Unix), el Add-on `Splunk_TA_nix` se configuró manualmente para parsear los siguientes inputs desde Ubuntu:
-
-* **Fuerza Bruta SSH & Sudo:** sourcetype `linux_secure` / `syslog` (`auth.log`)
-* **Tráfico Web DVWA:** sourcetype `access_combined` (`access.log`)
-* **Errores de Webserver / DoS:** sourcetype `apache_error` (`error.log`)
-* **Lógica de Kernel & Archivos:** sourcetype `auditd` (`audit.log`)
+## 🛡️ Consideraciones de Seguridad (Defense Perspective)
+* **Gestión de Credenciales:** NO almacenar credenciales en scripts de automatización. Utilizar `splunk.secret` o gestión de secretos del SO.
+* **Control de Acceso:** Configurar autenticación robusta y limitar el acceso a la Web UI a la subred de gestión.
+* **Licenciamiento:** Verificar que el volumen de ingestión diario no exceda los límites de la licencia para evitar interrupciones de servicio.
