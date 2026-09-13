@@ -13,4 +13,16 @@ Este directorio contiene la documentación técnica y las plantillas de configur
 
 ---
 
-> **Nota de Seguridad:** Estos archivos contienen configuraciones diseñadas para un entorno de laboratorio aislado. No aplicar estas configuraciones en entornos de producción sin una revisión de seguridad y adaptación a las necesidades específicas.
+## 📖 Detalles de los Componentes
+
+### 🛡️ Auditd-Rules.md
+Documenta la implementación de reglas de auditoría a nivel de kernel utilizando `auditd`. El objetivo es capturar eventos críticos del sistema operativo, tales como modificaciones en archivos de autenticación (`/etc/passwd`, `/etc/shadow`), cambios en configuraciones de red (`sshd_config`) y la ejecución de comandos con privilegios elevados (`sudo`), proporcionando visibilidad sobre actividades potencialmente maliciosas.
+
+### ⚔️ Setup Kali-Linux.md
+Describe la configuración del host atacante dentro del entorno de laboratorio. Incluye detalles sobre la configuración de red y un catálogo de herramientas esenciales para el ejercicio de *Red Team*, tales como `nmap` y `gobuster` para reconocimiento, `hydra` para fuerza bruta, y herramientas para explotación web y DoS. También establece directrices de seguridad para el manejo de este host.
+
+### 📊 Setup Splunk-SIEM.md
+Detalla la infraestructura del servidor SIEM (Splunk Enterprise), responsable de la centralización y análisis de telemetría. Incluye información sobre los puertos de comunicación, la configuración de ingestión de datos mediante el Add-on `Splunk_TA_nix` y los tipos de logs (`sourcetypes`) recopilados (seguridad Linux, logs de Apache, auditoría de kernel), permitiendo la correlación de eventos y la detección de amenazas.
+
+### 🖥️ Setup Ubuntu-Server.md
+Presenta la configuración del host víctima, el cual aloja las aplicaciones y servicios vulnerables para las pruebas de penetración (ej. DVWA). Documenta la arquitectura de los servicios expuestos (SSH, Apache, MariaDB), la integración del agente de logs con el SIEM y las configuraciones de seguridad (hardening) necesarias para mantener la integridad del laboratorio mientras se simulan ataques.
