@@ -4,11 +4,11 @@ Este documento mapea los **Playbooks de Defensa** existentes en el laboratorio c
 
 | ID ISO | Control | Descripción Técnica (ISO 27002) | Playbook Relacionado | Evidencia de Control | Responsable | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **8.15** | Registro de eventos | Eventos de seguridad (logs) registrados, protegidos y revisados para detectar anomalías. | [Todos (SIEM)](../../Defense/01_Playbooks/) | `[Link a Logs]` | CISO / Lab Admin | En revisión |
-| **8.16** | Monitoreo de actividades | Monitoreo de sistemas para detectar comportamiento inusual (ataques, acceso no autorizado). | [Nmap](../../Defense/01_Playbooks/Playbook-Nmap.md) | `[Link a Alertas]` | CISO / Lab Admin | Implementado |
-| **8.8** | Gestión de vulnerabilidades | Identificación y tratamiento de vulnerabilidades técnicas en infraestructura y aplicaciones. | [DVWA](../../Defense/01_Playbooks/Playbook-DVWA-BruteForce.md) | `[Link a Escaneos]` | CISO / Lab Admin | Pendiente |
-| **5.15** | Control de acceso | Restricción de acceso a información y activos según necesidad (principio mínimo privilegio). | [Hydra](../../Defense/01_Playbooks/Playbook-Hydra-BruteForce.md) | `[Link a Config]` | CISO / Lab Admin | En revisión |
-| **8.20** | Seguridad de redes | Gestión de seguridad de redes y segregación para proteger activos de información. | [DoS](../../Defense/01_Playbooks/Playbook-DoS.md) | `[Link a Firewalls]` | CISO / Lab Admin | Pendiente |
+| **8.15** | Registro de eventos | Eventos de seguridad (logs) registrados, protegidos y revisados para detectar anomalías. | [SIEM](../../Home-Lab/homelab-soc/docs/) | `[Link a Logs]` | CISO / Lab Admin | En revisión |
+| **8.16** | Monitoreo de actividades | Monitoreo de sistemas para detectar comportamiento inusual (ataques, acceso no autorizado). | [Nmap](../../Home-Lab/homelab-soc/docs/Nmap%20-%20PortScan/Playbook-Nmap.md) | `[Link a Alertas]` | CISO / Lab Admin | Implementado |
+| **8.8** | Gestión de vulnerabilidades | Identificación y tratamiento de vulnerabilidades técnicas en infraestructura y aplicaciones. | [DVWA](../../Attack/soc/docs/DVWA-Attacks/Playbook-DVWA-BruteForce.md) | `[Link a Escaneos]` | CISO / Lab Admin | Pendiente |
+| **5.15** | Control de acceso | Restricción de acceso a información y activos según necesidad (principio mínimo privilegio). | [Hydra](../../Attack/soc/docs/Network-Attacks/Playbook-Hydra-BruteForce.md) | `[Link a Config]` | CISO / Lab Admin | En revisión |
+| **8.20** | Seguridad de redes | Gestión de seguridad de redes y segregación para proteger activos de información. | [DoS](../../Attack/soc/docs/Network-Attacks/Playbook-DoS.md) | `[Link a Firewalls]` | CISO / Lab Admin | Pendiente |
 
 ## Notas de Mapeo
 - **Evidencia**: Debe apuntar a reportes, capturas de pantalla o logs del laboratorio.
