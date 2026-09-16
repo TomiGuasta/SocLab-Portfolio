@@ -8,6 +8,7 @@ Esta matriz centraliza los riesgos de seguridad de la información identificados
 | XSS | 4 | 3 | 12 (Alto) | [Ver Tratamiento](./Tratamiento/) | [XSS](../../Defense/01_Playbooks/Playbook-XSS.md) |
 | Brute Force (DVWA) | 4 | 3 | 12 (Alto) | [Ver Tratamiento](./Tratamiento/) | [DVWA Brute Force](../../Defense/01_Playbooks/Playbook-DVWA-BruteForce.md) |
 | Brute Force (Hydra) | 3 | 4 | 12 (Alto) | [Ver Tratamiento](./Tratamiento/) | [Hydra Brute Force](../../Defense/01_Playbooks/Playbook-Hydra-BruteForce.md) |
+| Nmap (Reconocimiento) | 5 | 2 | 10 (Alto) | [Ver Tratamiento](./Tratamiento/) | [Nmap](../../Defense/01_Playbooks/Playbook-Nmap.md) |
 
 ## Metodología
 - **Cálculo:** Probabilidad (1-5) * Impacto (1-4) = Nivel de Riesgo.
