@@ -5,6 +5,7 @@ Esta matriz centraliza los riesgos de seguridad de la información identificados
 | Escenario de Ataque | Probabilidad (1-5) | Impacto (1-4) | Nivel de Riesgo | Plan de Tratamiento | Playbook Relacionado |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | *Ejemplo: SQLi* | *4* | *4* | *16 (Alto)* | [Ver Tratamiento](./Tratamiento/) | [SQLi](../../../homelab-soc/docs/DVWA-Attacks/SQL%20Injection%20+%20Hashing/Playbook-SQLInjection.md) |
+| XSS | 4 | 3 | 12 (Alto) | [Ver Tratamiento](./Tratamiento/) | [XSS](../../Defense/01_Playbooks/Playbook-XSS.md) |
 
 ## Metodología
 - **Cálculo:** Probabilidad (1-5) * Impacto (1-4) = Nivel de Riesgo.
