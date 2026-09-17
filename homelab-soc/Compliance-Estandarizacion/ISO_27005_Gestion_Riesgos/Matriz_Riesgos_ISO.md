@@ -11,6 +11,7 @@ Esta matriz centraliza los riesgos de seguridad de la información identificados
 | Nmap (Reconocimiento) | 5 | 2 | 10 (Alto) | [Ver Tratamiento](./Tratamiento/) | [Nmap](../../Defense/01_Playbooks/Playbook-Nmap.md) |
 | DoS | 3 | 4 | 12 (Alto) | [Ver Tratamiento](./Tratamiento/) | [DoS](../../Defense/01_Playbooks/Playbook-DoS.md) |
 | DVWA Fuzzing | 4 | 2 | 8 (Medio) | [Ver Tratamiento](./Tratamiento/) | [DVWA Fuzzing](../../Defense/01_Playbooks/Playbook-DVWA-Fuzzing.md) |
+| GoBuster Fuzzing | 4 | 2 | 8 (Medio) | [Ver Tratamiento](./Tratamiento/) | [GoBuster Fuzzing](../../Defense/01_Playbooks/Playbook-GoBuster-Fuzzing.md) |
 
 ## Metodología
 - **Cálculo:** Probabilidad (1-5) * Impacto (1-4) = Nivel de Riesgo.
