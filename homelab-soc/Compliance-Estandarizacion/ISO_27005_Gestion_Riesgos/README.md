@@ -8,7 +8,6 @@ Establecer un proceso sistemático para la evaluación y tratamiento de riesgos 
 ## Estructura Propuesta
 - `Metodologia.md`: Descripción de la metodología de evaluación de riesgos adoptada.
 - `Registro_Riesgos.md`: Registro centralizado de riesgos identificados.
-- `Evaluaciones/`: Evaluaciones detalladas de riesgos por área o ataque.
 - `Tratamiento/`: Planes de tratamiento de riesgos.
 
 ---
