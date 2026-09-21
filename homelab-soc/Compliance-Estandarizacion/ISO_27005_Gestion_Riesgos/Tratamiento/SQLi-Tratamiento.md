@@ -20,5 +20,9 @@
 - Impacto Estimado: 2
 - Nivel de Riesgo Residual: 4 (Bajo)
 
+## 5. Contexto de Adversario (MITRE ATT&CK)
+- Técnica local: [T1190 - Exploit Public-Facing Application](../../../../MITRE/02 - Técnicas/T1190 - Exploit Public-Facing Application.md)
+- Link Oficial: [MITRE ATT&CK - SQL Injection](https://attack.mitre.org/techniques/T1190/)
+
 ---
 *Referencia técnica: [Playbook SQLi](../../../Defense/01_Playbooks/Playbook-SQLInjection.md)*
