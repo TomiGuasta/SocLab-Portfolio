@@ -25,3 +25,4 @@
 - Link Oficial: [MITRE ATT&CK - XSS](https://attack.mitre.org/techniques/T1189/)
 
 ---
+*Referencia técnica: [Playbook XSS](../../Defense/01_Playbooks/Playbook-XSS.md)*

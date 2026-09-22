@@ -25,3 +25,4 @@
 - Link Oficial: [MITRE ATT&CK - SQL Injection](https://attack.mitre.org/techniques/T1190/)
 
 ---
+*Referencia técnica: [Playbook SQLi](../../../Defense/01_Playbooks/Playbook-SQLInjection.md)*
