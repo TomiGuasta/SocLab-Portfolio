@@ -1,62 +1,61 @@
 ---
-tags: [siem, splunk, alerts, savedsearches, blue-team, detection]
-fecha: 2026-09-30
-componente: Splunk SIEM - Automation & Detection
+tags: [siem, splunk, alerts, savedsearches, blue-team, detection, telegram]
+fecha: 2026-10-01
+componente: Splunk SIEM - Automation & Telegram Notifications
 ---
 
-# 🚨 Automatización de Alertas en Splunk (`savedsearches.conf`)
+# 🚨 Automatización de Alertas en Splunk con Notificaciones por Telegram (`savedsearches.conf` & `telegram_alert.py`)
 
-Este directorio contiene la configuración de búsquedas guardadas y alertas automatizadas (`savedsearches.conf`) traducidas directamente desde los playbooks operativos del portafolio (`Defense/01_Playbooks/`).
+Este directorio contiene la configuración de búsquedas guardadas y alertas automatizadas (`savedsearches.conf`), así como el script disparador en Python (`telegram_alert.py`) para enviar notificaciones en tiempo real directamente a un canal o chat de Telegram cuando se detectan amenazas en el Home Lab.
 
 ## 📁 Estructura
-- `savedsearches.conf`: Archivo de configuración nativo de Splunk con las alertas preconfiguradas para detección de amenazas en el Home Lab.
+- `savedsearches.conf`: Configuración nativa de Splunk con alertas habilitadas para ejecutar el script de notificación.
+- `telegram_alert.py`: Script en Python encargado de procesar los resultados de Splunk y enviarlos formateados mediante la API de Telegram Bot.
 
 ## ⚙️ Reglas de Detección Incluidas
 
-1. **SSH Brute Force (`ssh_brute_force_detection`)**
-   - **Severidad:** Media (3)
-   - **Frecuencia:** Cada 5 minutos.
-   - **SPL:** `index=main (sourcetype=linux_secure OR sourcetype=auth) "Failed password" | stats count by src_ip, user | where count >= 5`
-
-2. **DVWA Web Brute Force (`dvwa_brute_force_detection`)**
-   - **Severidad:** Media (3)
-   - **Frecuencia:** Cada 5 minutos.
-   - **SPL:** `index=main sourcetype=access_combined status=401 | stats count by clientip, uri | where count > 10`
-
-3. **GoBuster / Fuzzing Directory Scanning (`gobuster_fuzzing_detection`)**
-   - **Severidad:** Baja/Media (2)
-   - **Frecuencia:** Cada 5 minutos.
-   - **SPL:** `index=main sourcetype=access_combined (status=404 OR status=403) | stats count by clientip | where count > 50`
-
-4. **SQL Injection (`sql_injection_detection`)**
-   - **Severidad:** Alta (4)
-   - **Frecuencia:** Cada 1 minuto.
-   - **SPL:** `index=main sourcetype=access_combined (uri="*UNION*SELECT*" OR uri="*OR*=*'") | stats count by clientip, uri`
-
-5. **Cross-Site Scripting XSS (`xss_attack_detection`)**
-   - **Severidad:** Media (3)
-   - **Frecuencia:** Cada 1 minuto.
-   - **SPL:** `index=main sourcetype=access_combined (uri="*%3Cscript%3E*") | stats count by clientip, uri`
-
-6. **Auditd Critical File Modification (`auditd_sensitive_file_modification`)**
-   - **Severidad:** Crítica (5)
-   - **Frecuencia:** Cada 5 minutos.
-   - **SPL:** `index=main (key=passwd_changes OR key=shadow_changes OR key=sudoers_changes) | table _time, host, exe, uid, success, key`
+1. **SSH Brute Force (`ssh_brute_force_detection`)** - Severidad Media (3)
+2. **DVWA Web Brute Force (`dvwa_brute_force_detection`)** - Severidad Media (3)
+3. **GoBuster / Fuzzing Directory Scanning (`gobuster_fuzzing_detection`)** - Severidad Baja/Media (2)
+4. **SQL Injection (`sql_injection_detection`)** - Severidad Alta (4)
+5. **Cross-Site Scripting XSS (`xss_attack_detection`)** - Severidad Media (3)
+6. **Auditd Critical File Modification (`auditd_sensitive_file_modification`)** - Severidad Crítica (5)
 
 ---
 
-## 🛠️ Instrucciones de Despliegue en Splunk
+## 🛠️ Instrucciones de Despliegue e Integración con Telegram
 
-Para desplegar estas alertas en tu instancia de Splunk Enterprise:
+### 1. Configurar el Bot de Telegram
+1. Habla con [@BotFather](https://t.me/BotFather) en Telegram para crear un nuevo bot y obtener tu **Bot Token**.
+2. Obtén el **Chat ID** del chat o canal donde deseas recibir las alertas (puedes usar bots como `@userinfobot` o la API `getUpdates`).
 
-1. Ubicar el archivo de configuración en la app de búsqueda (por defecto `search`):
+### 2. Desplegar los archivos en Splunk Enterprise
+Copia los archivos en el directorio de la aplicación `search` de tu servidor Splunk (por ejemplo, `/opt/splunk/etc/apps/search/local/`):
+
+1. **Copiar el script de alerta:**
    ```bash
-   /opt/splunk/etc/apps/search/local/savedsearches.conf
+   cp telegram_alert.py /opt/splunk/bin/scripts/
+   chmod +x /opt/splunk/bin/scripts/telegram_alert.py
    ```
-   *(Si el archivo ya existe, puedes fusionar las secciones correspondientes).*
 
-2. Reiniciar el servicio de Splunk o recargar la configuración de la aplicación:
+2. **Configurar credenciales en variables de entorno de Splunk** (o editar directamente el script con tus valores):
+   Puedes exportar las variables en el entorno del servicio de Splunk (`/opt/splunk/etc/splunk-launch.conf` o systemd service):
+   ```env
+   TELEGRAM_BOT_TOKEN="TU_BOT_TOKEN_AQUÍ"
+   TELEGRAM_CHAT_ID="TU_CHAT_ID_AQUÍ"
+   ```
+
+3. **Copiar la configuración de alertas:**
+   ```bash
+   cp savedsearches.conf /opt/splunk/etc/apps/search/local/savedsearches.conf
+   ```
+
+4. **Probar el envío manual del script:**
+   ```bash
+   python3 /opt/splunk/bin/scripts/telegram_alert.py --test
+   ```
+
+5. **Reiniciar Splunk o recargar configuración:**
    ```bash
    /opt/splunk/bin/splunk restart
    ```
-   o vía REST / Web UI: `http://<splunk-ip>:8000/en-US/debug/refresh`
