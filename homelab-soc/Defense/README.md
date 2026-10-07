@@ -92,3 +92,32 @@ Copia los archivos en el directorio de la aplicación `search` de tu servidor Sp
    ```bash
    /opt/splunk/bin/splunk restart
    ```
+
+---
+
+## 💡 Alternativa para Splunk Free: Poller por API REST (`splunk_poller.py`)
+
+Como se mencionó anteriormente, la versión gratuita de Splunk (Splunk Free) deshabilita las acciones de alerta programadas (`savedsearches.conf`). Para superar esta limitación en un entorno de laboratorio sin incurrir en costos de licencia, se desarrolló **`splunk_poller.py`**.
+
+### ¿Cómo funciona el Poller Externo?
+En lugar de depender del programador interno de Splunk:
+1. **Consulta Programada:** Se ejecuta de forma externa (mediante el Programador de Tareas de Windows o un `cron` job en Linux) cada 5 minutos.
+2. **API REST de Splunk:** Se conecta mediante HTTPS (`https://localhost:8089/services/search/jobs/oneshot`) utilizando autenticación HTTP Basic.
+3. **Evaluación de Eventos:** Ejecuta las consultas SPL de detección directamente contra el motor de Splunk y evalúa si el conteo de resultados es mayor a 0 (`count > 0`).
+4. **Despacho a Telegram:** Si encuentra actividad maliciosa, genera y envía inmediatamente la alerta formateada con Markdown a Telegram.
+
+### Configuración de Credenciales en `splunk_poller.py`
+Abre `splunk_poller.py` y configura tus credenciales reales:
+```python
+SPLUNK_PASSWORD = "tu_password_de_splunk"
+BOT_TOKEN = "tu_token_de_botfather"
+CHAT_ID = "tu_chat_id_numerico"
+```
+
+### Despliegue y Automatización en Windows
+1. **Programar tarea en Windows (Task Scheduler):**
+   - Crear una Tarea llamada `SplunkPoller`.
+   - Disparador: Repetir cada 5 minutos indefinidamente.
+   - Acción: Iniciar un programa -> `python.exe` con argumento `D:\Obsidian\CiberSecurity Portfolio\Portfolio\Defense\02_SIEM\splunk_poller.py`.
+   - Iniciar en: `D:\Obsidian\CiberSecurity Portfolio\Portfolio\Defense\02_SIEM\`
+

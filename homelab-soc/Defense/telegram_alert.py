@@ -12,11 +12,11 @@ import urllib.request
 import urllib.parse
 
 # Configuration: Can be overridden by environment variables or edited here
-BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
-CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "YOUR_CHAT_ID_HERE")
+BOT_TOKEN = "8683979969:AAHdlRGfEj1bbosPTn2sqdPDtqHGEEyLGic"
+CHAT_ID = "8510239173"
 
 def send_telegram_message(message):
-    if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE" or CHAT_ID == "YOUR_CHAT_ID_HERE":
+    if BOT_TOKEN == "8683979969:AAHdlRGfEj1bbosPTn2sqdPDtqHGEEyLGic" or CHAT_ID == "8510239173":
         print("Error: Telegram Bot Token or Chat ID not configured.", file=sys.stderr)
         return False
     
