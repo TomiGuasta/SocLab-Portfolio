@@ -15,6 +15,15 @@ import urllib.parse
 import base64
 import time
 
+# Import Virtual Firewall Manager
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "04_Tooling"))
+try:
+    from firewall_manager import VirtualFirewall
+    FW = VirtualFirewall()
+except ImportError:
+    FW = None
+    print("[!] Warning: firewall_manager.py not found. Automatic blocking disabled.")
+
 # Configuration via Environment Variables or defaults
 SPLUNK_URL = os.environ.get("SPLUNK_URL", "https://localhost:8089")
 SPLUNK_USER = os.environ.get("SPLUNK_USER", "admin")
@@ -71,8 +80,7 @@ def send_telegram_message(message):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": CHAT_ID,
-        "text": message,
-        "parse_mode": "Markdown"
+        "text": message
     }
     
     data = urllib.parse.urlencode(payload).encode("utf-8")
@@ -146,16 +154,41 @@ def main():
                 print(f"[!] ALERT TRIGGERED: {name} ({count} events found)")
                 alerts_triggered += 1
                 
+                # Extract attacker IPs
+                attacker_ips = []
+                if FW:
+                    for res in results:
+                        ip = res.get("src_ip") or res.get("clientip")
+                        if ip and ip != "unknown":
+                            attacker_ips.append(ip)
+                
+                ip_display = ", ".join(set(attacker_ips)) if attacker_ips else "N/A"
+
                 # Format message
                 message = (
                     f"{severity} *SECURITY ALERT: {name}*\n\n"
                     f"📝 *Description:* {desc}\n"
+                    f"🎯 *Attacker IP(s):* `{ip_display}`\n"
                     f"🔢 *Events Count:* {count}\n"
                     f"🕒 *Timestamp:* `{time.strftime('%Y-%m-%d %H:%M:%S')}`\n\n"
                     f"_Home Lab SIEM - Splunk Free REST API Poller_"
                 )
                 
                 send_telegram_message(message)
+
+                # Automatic Mitigation (Firewall)
+                if FW and attacker_ips:
+                    for ip in set(attacker_ips):
+                        blocked = FW.add_block_rule(ip, f"Automated block: {name}")
+                        if blocked:
+                            fw_message = (
+                                f"🛡️ *FIREWALL ACTIVE RESPONSE (SOAR)*\n\n"
+                                f"🚫 *Blocked IP:* `{ip}`\n"
+                                f"📝 *Reason:* Automated block: {name}\n"
+                                f"🕒 *Timestamp:* `{time.strftime('%Y-%m-%d %H:%M:%S')}`\n\n"
+                                f"_Home Lab Virtual Firewall (FW-01)_"
+                            )
+                            send_telegram_message(fw_message)
             else:
                 print(f"    [-] No matches for {name}.")
         else:

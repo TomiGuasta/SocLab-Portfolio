@@ -16,7 +16,7 @@ BOT_TOKEN = "8683979969:AAHdlRGfEj1bbosPTn2sqdPDtqHGEEyLGic"
 CHAT_ID = "8510239173"
 
 def send_telegram_message(message):
-    if BOT_TOKEN == "8683979969:AAHdlRGfEj1bbosPTn2sqdPDtqHGEEyLGic" or CHAT_ID == "8510239173":
+    if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE" or CHAT_ID == "YOUR_CHAT_ID_HERE":
         print("Error: Telegram Bot Token or Chat ID not configured.", file=sys.stderr)
         return False
     
@@ -54,6 +54,7 @@ def main():
         if len(sys.argv) == 2 and sys.argv[1] == "--test":
             success = send_telegram_message("🚨 *Test Security Alert*\nSplunk Telegram integration test successful!")
             print("Test message sent successfully!" if success else "Test message failed.")
+            sys.exit(0 if success else 1)
         sys.exit(1)
         
     results_file = sys.argv[1]
