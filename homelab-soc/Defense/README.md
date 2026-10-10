@@ -121,3 +121,23 @@ CHAT_ID = "tu_chat_id_numerico"
    - Acción: Iniciar un programa -> `python.exe` con argumento `D:\Obsidian\CiberSecurity Portfolio\Portfolio\Defense\02_SIEM\splunk_poller.py`.
    - Iniciar en: `D:\Obsidian\CiberSecurity Portfolio\Portfolio\Defense\02_SIEM\`
 
+---
+
+## 🛡️ Consulta SIEM para Firewall / Active Response (SOAR)
+
+Para auditar y visualizar en tiempo real las IPs bloqueadas por el firewall virtual y aplicadas en el kernel mediante `iptables`, puedes utilizar la siguiente consulta SPL en Splunk:
+
+```spl
+index=firewall action=block OR action=drop 
+| stats count by src_ip, dest_ip, reason 
+| sort - count
+```
+
+### Correlación con `iptables`
+Cuando ejecutas en el servidor Ubuntu la validación de reglas activas:
+```bash
+sudo iptables -S
+```
+Verás las reglas en crudo del kernel (ej: `-A INPUT -s 192.168.0.36 -j DROP`). La consulta SPL anterior mapea exactamente esas IPs (`src_ip`), el destino protegido (`dest_ip`), el motivo o comentario de la detección (`reason`) y la cantidad de intentos bloqueados (`count`), unificando la visibilidad del SIEM con el enforcement del SOAR.
+
+
