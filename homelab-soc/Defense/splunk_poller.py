@@ -72,6 +72,25 @@ DETECTION_QUERIES = [
     }
 ]
 
+STATE_FILE = os.path.join(os.path.dirname(__file__), "alert_state.json")
+ALERT_COOLDOWN = 7200  # 2 hours cooldown per detection + IP to prevent spamming every 5 min
+
+def load_alert_state():
+    if os.path.exists(STATE_FILE):
+        try:
+            with open(STATE_FILE, "r") as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+def save_alert_state(state):
+    try:
+        with open(STATE_FILE, "w") as f:
+            json.dump(state, f, indent=4)
+    except Exception as e:
+        print(f"[!] Warning: Could not save alert state: {e}")
+
 def send_telegram_message(message):
     if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE" or CHAT_ID == "YOUR_CHAT_ID_HERE":
         print("[!] Error: Telegram Bot Token or Chat ID not configured.", file=sys.stderr)
@@ -180,6 +199,10 @@ def main():
                 "results": [{"src_ip": "192.168.0.36", "user": "root"}]
             }]
 
+    alert_state = load_alert_state()
+    current_time = time.time()
+    state_updated = False
+
     for det in detections_to_run:
         name = det["name"]
         desc = det["description"]
@@ -188,16 +211,32 @@ def main():
         count = len(results)
         
         if count > 0:
-            print(f"[!] ALERT TRIGGERED: {name} ({count} events found)")
-            alerts_triggered += 1
-            
             attacker_ips = []
             for res in results:
                 ip = res.get("src_ip") or res.get("clientip")
                 if ip and ip != "unknown":
                     attacker_ips.append(ip)
+
+            # Deduplication filter: check cooldown for each IP under this detection
+            new_ips = []
+            for ip in set(attacker_ips):
+                key = f"{name}_{ip}"
+                last_alerted = alert_state.get(key, 0)
+                if current_time - last_alerted > ALERT_COOLDOWN:
+                    new_ips.append(ip)
+                    alert_state[key] = current_time
+                    state_updated = True
+                else:
+                    print(f"    [-] Suppressing duplicate alert for IP {ip} on detection '{name}' (cooldown active).")
+
+            if not new_ips:
+                print(f"[*] Detection {name}: All detected IPs are within cooldown. Skipping alert.")
+                continue
+
+            print(f"[!] ALERT TRIGGERED: {name} ({len(new_ips)} new attacker IPs found)")
+            alerts_triggered += 1
             
-            ip_display = ", ".join(set(attacker_ips)) if attacker_ips else "N/A"
+            ip_display = ", ".join(new_ips)
 
             message = (
                 f"{severity} *SECURITY ALERT: {name}*\n\n"
@@ -212,8 +251,8 @@ def main():
             if res_ok:
                 print("[+] Security alert sent to Telegram successfully.")
 
-            if FW and attacker_ips:
-                for ip in set(attacker_ips):
+            if FW and new_ips:
+                for ip in new_ips:
                     blocked = FW.add_block_rule(ip, f"Automated block: {name}")
                     if blocked:
                         fw_message = (
@@ -227,7 +266,10 @@ def main():
                         if fw_ok:
                             print("[+] Firewall active response block notification sent to Telegram successfully.")
             else:
-                print(f"[!] Firewall Manager (FW) not available or no attacker IPs found.")
+                print(f"[!] Firewall Manager (FW) not available or no new attacker IPs found.")
+
+    if state_updated:
+        save_alert_state(alert_state)
                 
     print(f"[*] Polling complete. Total alerts triggered: {alerts_triggered}")
 
